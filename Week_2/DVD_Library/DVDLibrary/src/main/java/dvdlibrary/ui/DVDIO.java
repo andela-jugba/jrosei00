@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.classroster.ui;
+package dvdlibrary.ui;
 
 /**
  *
- * @author jrosenauer
+ * @author apprentice
  */
-//Check this section why all of this is necessary
-public interface UserIO {
-    void print(String message);
+public interface DVDIO {
+
+    void print(String msg);
 
     double readDouble(String prompt);
 
