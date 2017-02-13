@@ -21,7 +21,7 @@ public class DVDLibraryView {
     }
 
     public DVD getNewDVDInfo() {
-        String EIDRNumber = io.readString("Please enter EIDRNumber");
+        String EIDRNumber = io.readString("Please enter EIDR Number");
         String Title = io.readString("Please enter Title");
         String releaseDate = io.readString("Please enter the Release Date");
         String Rating = io.readString("Please enter the MPAA Rating");
@@ -44,6 +44,17 @@ public class DVDLibraryView {
 
     public void displayCreateSuccessBanner() {
         io.readString("DVD successfully created.  Please hit enter to continue");
+    }
+
+    public int printMenuAndGetSelection() {
+        io.print("=== Menu ===");
+        io.print("1 = List DVDs");
+        io.print("2 = Create DVD");
+        io.print("3 = View DVD");
+        io.print("4 = Remove DVD");
+        io.print("5 = Exit");
+        
+        return io.readInt("Please select from the above items.");
     }
 
     public void displayDVDList(List<DVD> DVDList) {
@@ -104,7 +115,7 @@ public class DVDLibraryView {
     }
 
     public void displayErrorMessage(String errorMsg) {
-    io.print("=== ERROR ===");
-    io.print(errorMsg);
-}
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
+    }
 }

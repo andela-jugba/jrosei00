@@ -1,10 +1,15 @@
 package dvdlibrary.controller;
 
-import dvdlibrary.controller.DVDLibraryController.newDVD;
+import dvdlibrary.dao.DVDLibraryAuditDao;
+import dvdlibrary.dao.DVDLibraryAuditDaoFileImpl;
 import dvdlibrary.dao.DVDLibraryDao;
-import dvdlibrary.dao.DVDLibraryDaoException;
-import dvdlibrary.dao.DVDLibraryImpl;
+import dvdlibrary.dao.DVDLibraryDaoImpl;
+import dvdlibrary.dao.DVDLibraryPersistenceException;
 import dvdlibrary.dto.DVD;
+import dvdlibrary.service.DVDLibraryDataValidationException;
+import dvdlibrary.service.DVDLibraryDuplicateIdException;
+import dvdlibrary.service.DVDLibraryServiceLayer;
+import dvdlibrary.service.DVDLibraryServiceLayerImpl;
 import dvdlibrary.ui.DVDIO;
 import dvdlibrary.ui.DVDIOImpl;
 import dvdlibrary.ui.DVDLibraryView;
@@ -21,17 +26,21 @@ import java.util.List;
  */
 public class DVDLibraryController {
 
-    DVDLibraryDao dao = new DVDLibraryImpl();
-
-    private DVDIO io = new DVDIOImpl();
+    private DVDIO io = new DVDIOImpl(); //please explain line
     DVDLibraryView view;
+    private DVDLibraryServiceLayer service;
+
+    DVDLibraryDao dao = new DVDLibraryDaoImpl();
+
     DVDLibraryController newDVD;
     DVDLibraryController getEIDRNumber;
     DVDLibraryController ListDVD;
+    DVDLibraryAuditDao auditDao = new DVDLibraryAuditDaoFileImpl();
 
     public DVDLibraryController(DVDLibraryDao dao, DVDLibraryView view) {
         this.dao = dao;
         this.view = view;
+        service = new DVDLibraryServiceLayerImpl(dao, auditDao);
     }
 
     public DVDLibraryController() {
@@ -47,7 +56,7 @@ public class DVDLibraryController {
 
                 switch (menuSelection) {
                     case 1:
-                        ListDVD();
+                        listDVDs();
                         break;
                     case 2:
                         createDVD();
@@ -67,39 +76,48 @@ public class DVDLibraryController {
             }
 
             exitMessage();
-        } catch (DVDLibraryDaoException e) {
+        } catch (DVDLibraryPersistenceException e) {
             view.displayErrorMessage(e.getMessage());
         }
     }
-}
-private int getMenuSelection() {
-        return view.printMenuAndGetSelection();
-}
 
-    private void createDVD() throws DVDLibraryDaoException {
-        view.displayCreateDVDBanner();
-        DVD newDVD = view.getNewDVDInfo();
-        dao.addDVD(newDVD.getEIDRNumber(), newDVD);
-        view.displayCreateSuccessBanner();
+    private int getMenuSelection() {
+        return view.printMenuAndGetSelection();
     }
 
-    private void listDVDs() throws DVDLibraryDaoException {
-        view.displayDisplayAllBanner();
-        List<DVD> DVDList = dao.getAllDVD();
+    private void createDVD() throws DVDLibraryPersistenceException {
+        view.displayCreateDVDBanner();
+        boolean hasErrors = false;
+        do {
+            DVD currentDVD = view.getNewDVDInfo();
+            try {
+                service.createDVD(currentDVD);
+                view.displayCreateSuccessBanner();
+                hasErrors = false;
+            } catch (DVDLibraryDuplicateIdException | DVDLibraryDataValidationException e) {
+                hasErrors = true;
+                view.displayErrorMessage(e.getMessage());
+            }
+        } while (hasErrors);
+
+    }
+
+    private void listDVDs() throws DVDLibraryPersistenceException {
+        List<DVD> DVDList = service.getAllDVDs();
+
         view.displayDVDList(DVDList);
     }
 
-    private void viewDVD() throws DVDLibraryDaoException {
-        view.displayDisplayDVDBanner();
+    private void viewDVD() throws DVDLibraryPersistenceException {
         String EIDRNumber = view.getEIDRNumberChoice();
-        DVD dvd = dao.getDVD(EIDRNumber);
+        DVD dvd = service.getDVD(EIDRNumber);
         view.displayDVD(dvd);
     }
 
-    private void removeDVD() throws DVDLibraryDaoException {
+    private void removeDVD() throws DVDLibraryPersistenceException {
         view.displayRemoveDVDBanner();
-        String studentId = view.getEIDRNumberChoice();
-        dao.removeDVD(EIDRNumber);
+        String EIDRNumber = view.getEIDRNumberChoice();
+        service.removeDVD(EIDRNumber);
         view.displayRemoveSuccessBanner();
     }
 

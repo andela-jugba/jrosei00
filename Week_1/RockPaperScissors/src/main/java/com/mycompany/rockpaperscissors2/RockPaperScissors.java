@@ -35,9 +35,9 @@ public class RockPaperScissors {
             chosenRound = inputReader.nextInt();
             inputReader.nextLine();
             //Error message if that number doesn't apply//
-            if (chosenRound > 10) {
+            if (chosenRound > 10 || chosenRound < 1) {
                 System.out.println("Error Message: Please type a number between 1 and 10.");
-
+                return;
             } else {
 
                 //Number of Rounds Loop//
