@@ -8,6 +8,7 @@ package vendingmachine.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.CoinStack;
 import vendingmachine.dto.Snack;
 
@@ -21,7 +22,7 @@ public interface VendingMachineServiceLayer {
 
     public void sufficientFunds(ArrayList<Snack> Candy, int candyInList, BigDecimal Payment) throws InsufficientFundsException;
 
-    public void getInventory(ArrayList<Snack> Candy, int candyInList);
+    public void updateInventory(ArrayList<Snack> Candy, int candyInList) throws VendingMachinePersistenceException;
 
     public BigDecimal Change(ArrayList<Snack> Candy, int candyInList, BigDecimal Payment);
 

@@ -8,6 +8,7 @@ package vendingmachine;
 import vendingmachine.controller.VendingMachineController;
 import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
+import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.service.VendingMachineServiceLayer;
 import vendingmachine.service.VendingMachineServiceLayerImpl;
 import vendingmachine.ui.VendingMachineIO;
@@ -20,7 +21,7 @@ import vendingmachine.ui.VendingMachineView;
  */
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws VendingMachinePersistenceException {
 
         VendingMachineIO myIO = new VendingMachineIOImpl();
 

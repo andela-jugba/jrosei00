@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.CoinStack;
 import vendingmachine.dto.Snack;
 import vendingmachine.service.InsufficientFundsException;
@@ -32,7 +33,7 @@ public class VendingMachineController {
         this.vmv = vmv;
     }
 
-    public void run() {
+    public void run() throws VendingMachinePersistenceException {
 
         BigDecimal Money;
         int Item;
@@ -51,7 +52,7 @@ public class VendingMachineController {
             Logger.getLogger(VendingMachineController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        vmsl.getInventory(Foods, Item);
+        vmsl.updateInventory(Foods, Item);
 
         BigDecimal ch = vmsl.Change(Foods, Item, Money);
 

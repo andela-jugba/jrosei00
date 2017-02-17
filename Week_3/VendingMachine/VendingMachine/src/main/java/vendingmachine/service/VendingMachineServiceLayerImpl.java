@@ -29,7 +29,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
     public VendingMachineServiceLayerImpl(VendingMachineDao myDao) {
 
-        this.dao = dao;
+        this.dao = myDao;
     }
 
     public VendingMachineServiceLayerImpl() {
@@ -111,11 +111,11 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
     }
 
-    @Override
-    public void getInventory(ArrayList<Snack> Candy, int candyInList) {
+    public void updateInventory(ArrayList<Snack> Candy, int candyInList) throws VendingMachinePersistenceException {
         int Inventory = Candy.get(candyInList).getInventory();
-        Inventory -= Inventory;
+        Inventory -= 1;
         Candy.get(candyInList).setInventory(Inventory);
+        dao.writeLibrary(Candy);
     }
 
     
