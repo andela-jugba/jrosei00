@@ -5,14 +5,22 @@
  */
 package vendingmachine.ui;
 
+import java.math.BigDecimal;
+import java.util.List;
+import vendingmachine.dto.CoinStack;
+import vendingmachine.dto.Snack;
+
 /**
  *
  * @author apprentice
  */
 public class VendingMachineView {
 
-    int insertedAmount;
     public VendingMachineIO io;
+
+    public VendingMachineView() {
+
+    }
 
     public VendingMachineView(VendingMachineIO io) {
         this.io = io;
@@ -21,40 +29,38 @@ public class VendingMachineView {
     public static class menuItems {
 
     }
-//List Menu Items
 
-    public void insertPayment() {
-        insertedAmount = io.readInt("Please insert payment");
+    public BigDecimal insertPayment() {
+
+        String insertedAmount;
+
+        insertedAmount = io.readString("Please insert payment");
+        BigDecimal X = new BigDecimal(insertedAmount); //need to set scale
+        return X;
     }
 
-    public void listOfItems() {
-        boolean keepGoing = true;
-        int menuSelection = 0;
-        while (keepGoing) {
-            io.print("Menu");
-            io.print("1. Snickers ........ $0.75");
-            io.print("2. Twizzlers ....... $0.85");
-            io.print("3. Dorritos ........ $1.00");
-            io.print("4. Chips Ahoy! ..... $1.25");
-            io.print("5. M&M's ........... $0.75");
-            insertPayment();
+    public int listOfItems(List<Snack> Candy) {
 
-            int userInput = io.readInt("Please make a selection.");
-        }
+        io.print("Menu");
+        io.print("1. " + Candy.get(0).getName() + ".........." + Candy.get(0).getPrice());
+        io.print("2. " + Candy.get(1).getName() + ".........." + Candy.get(1).getPrice());
+        io.print("3. " + Candy.get(2).getName() + ".........." + Candy.get(2).getPrice());
+        io.print("4. " + Candy.get(3).getName() + ".........." + Candy.get(3).getPrice());
+        io.print("5. " + Candy.get(4).getName() + ".........." + Candy.get(4).getPrice());
 
-        this.io = new sufficientFunds();
-        io.print("Insufficient Funds. Please insert the correct amount.");
-        io.print("Please make your selection.");
+        int userInput = io.readInt("Please make a number selection.");
+        userInput -= 1;
+        return userInput;
     }
 
-    public void Change() {
+    public void Change(CoinStack cs, BigDecimal ch)  {
 
-        int Change = 0;
 
-        io.print("Your change is: " + Change);
-        io.print("Quarters: " + );
+        io.print("Your change is: " + ch);
+        io.print("Quarters: " + cs.getQuarters());
+        io.print("Dimes: " + cs.getDimes());
+        io.print("Nickels: " + cs.getNickels());
+        io.print("Pennies: " + cs.getPennies());
     }
-
-   
 
 }

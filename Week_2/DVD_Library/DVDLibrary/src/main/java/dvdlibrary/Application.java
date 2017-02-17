@@ -22,7 +22,7 @@ import dvdlibrary.ui.DVDLibraryView;
  */
 public class Application {
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
     // Instantiate the UserIO implementation
     DVDIO myIo = new DVDIOImpl();
     // Instantiate the View and wire the UserIO implementation into it

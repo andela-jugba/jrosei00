@@ -8,6 +8,9 @@ package vendingmachine.dao;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +25,10 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
     VendingMachineDaoImpl Snack;
 
-    public static final String SNACK_FILE = "VendingMachine.txt";
+    public static final String SNACK_FILE = "VendingMachine";
     public static final String DELIMITER = "::";
 
-    public List<Snack> getAllSnacks() throws VendingMachinePersistenceException {
+    public ArrayList<Snack> getAllSnacks() throws VendingMachinePersistenceException {
 
         Scanner scanner;
 
@@ -53,9 +56,28 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
             Foods.add(currentSnack);
         }
         return Foods;
-
-        private PurchasedItem() {
-            
-        }
     }
+
+    @Override
+    public void writeLibrary(ArrayList<Snack> Snacking) throws VendingMachinePersistenceException {
+               PrintWriter out;
+
+        try {
+            out = new PrintWriter(new FileWriter(SNACK_FILE));
+        } catch (IOException e) {
+            throw new VendingMachinePersistenceException(
+                    "Could not save candy data.", e);
+        }
+
+        //List<Snack> VendingMachine = this.getAllSnacks();
+        for (Snack currentSnack : Snacking) {
+
+            out.println(currentSnack.getName() + DELIMITER
+                    + currentSnack.getPrice() + DELIMITER
+                    + currentSnack.getInventory());
+            out.flush();
+        }
+        out.close();
+    }
+
 }

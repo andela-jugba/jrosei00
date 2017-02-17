@@ -5,10 +5,33 @@
  */
 package vendingmachine;
 
+import vendingmachine.controller.VendingMachineController;
+import vendingmachine.dao.VendingMachineDao;
+import vendingmachine.dao.VendingMachineDaoImpl;
+import vendingmachine.service.VendingMachineServiceLayer;
+import vendingmachine.service.VendingMachineServiceLayerImpl;
+import vendingmachine.ui.VendingMachineIO;
+import vendingmachine.ui.VendingMachineIOImpl;
+import vendingmachine.ui.VendingMachineView;
+
 /**
  *
  * @author apprentice
  */
 public class Application {
-    
+
+    public static void main(String[] args) {
+
+        VendingMachineIO myIO = new VendingMachineIOImpl();
+
+        VendingMachineView io = new VendingMachineView(myIO);
+
+        VendingMachineDao myDao = new VendingMachineDaoImpl();
+
+        VendingMachineServiceLayer vmsl = new VendingMachineServiceLayerImpl(myDao);
+
+        VendingMachineController vmv = new VendingMachineController(vmsl, io);
+
+        vmv.run();
+    }
 }

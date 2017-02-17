@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class DVDLibraryController {
 
-    private DVDIO io = new DVDIOImpl(); //please explain line
+    private DVDIO io = new DVDIOImpl();
     DVDLibraryView view;
     private DVDLibraryServiceLayer service;
 

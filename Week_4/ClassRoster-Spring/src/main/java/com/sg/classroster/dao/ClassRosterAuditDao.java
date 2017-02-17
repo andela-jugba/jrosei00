@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vendingmachine.service;
+package com.sg.classroster.dao;
 
 /**
  *
  * @author apprentice
  */
-public class InsufficientFundsException extends Exception {
-
-    public InsufficientFundsException(String please_insert_the_correct_amount) {
-    }
-    
+public interface ClassRosterAuditDao {
+       
+    public void writeAuditEntry(String entry) throws ClassRosterPersistenceException;
+   
 }

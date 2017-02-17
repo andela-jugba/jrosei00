@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vendingmachine.ui;
+package com.sg.classroster.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  *
- * @author apprentice
+ * @author mgaffney
  */
-public class VendingMachineIOImpl implements VendingMachineIO {
-    
+public class UserIOImpl implements UserIO {
+
     Scanner kb = new Scanner(System.in);
 
     public int readInt(String p) {

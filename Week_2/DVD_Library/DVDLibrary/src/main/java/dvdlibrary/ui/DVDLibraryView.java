@@ -85,7 +85,7 @@ public class DVDLibraryView {
             io.print(dvd.getRating());
             io.print("");
         } else {
-            io.print("No such student.");
+            io.print("No such DVD.");
         }
         io.readString("Please hit enter to continue.");
     }
@@ -103,8 +103,8 @@ public class DVDLibraryView {
     }
 
     public String getEIDRNumberChoice() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        return io.readString("Please enter the EIDR Number for the DVD you wish to see.");
+            }
 
     public void displayExitBanner() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
