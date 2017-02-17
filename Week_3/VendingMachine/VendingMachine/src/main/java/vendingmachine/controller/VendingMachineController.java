@@ -7,16 +7,12 @@ package vendingmachine.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.CoinStack;
 import vendingmachine.dto.Snack;
 import vendingmachine.service.InsufficientFundsException;
 import vendingmachine.service.VendingMachineServiceLayer;
-import vendingmachine.service.VendingMachineServiceLayerImpl;
-import vendingmachine.ui.VendingMachineIO;
-import vendingmachine.ui.VendingMachineIOImpl;
+import vendingmachine.service.noItemInventoryException;
 import vendingmachine.ui.VendingMachineView;
 
 /**
@@ -31,12 +27,14 @@ public class VendingMachineController {
     public VendingMachineController(VendingMachineServiceLayer vmsl, VendingMachineView vmv) {
         this.vmsl = vmsl;
         this.vmv = vmv;
+        
     }
 
     public void run() throws VendingMachinePersistenceException {
 
         BigDecimal Money;
         int Item;
+        boolean statement = false;
 
         ArrayList<Snack> Foods = new ArrayList<>();
 
@@ -49,9 +47,16 @@ public class VendingMachineController {
         try {
             vmsl.sufficientFunds(Foods, Item, Money);//in try catch
         } catch (InsufficientFundsException ex) {
-            Logger.getLogger(VendingMachineController.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(VendingMachineController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        try {
+            vmsl.ItemInventory(Foods, Item);
+        } catch (noItemInventoryException exe) {
+            statement = true;
+        }
+    
+        if (statement == false) {
         vmsl.updateInventory(Foods, Item);
 
         BigDecimal ch = vmsl.Change(Foods, Item, Money);
@@ -60,6 +65,7 @@ public class VendingMachineController {
 
         vmv.Change(cs, ch);
 
+        }
     }
 
 }

@@ -27,4 +27,6 @@ public interface VendingMachineServiceLayer {
     public BigDecimal Change(ArrayList<Snack> Candy, int candyInList, BigDecimal Payment);
 
     public CoinStack changeToCoins(BigDecimal Change);
+    
+    public void ItemInventory(ArrayList<Snack> Candy, int candyInList) throws noItemInventoryException;
 }

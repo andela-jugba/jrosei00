@@ -46,18 +46,17 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
         return null;
     }
-    
-    public void saveAllFood(ArrayList <Snack> Snacking) throws VendingMachinePersistenceException {
+
+    public void saveAllFood(ArrayList<Snack> Snacking) throws VendingMachinePersistenceException {
         VendingMachineDao sn = new VendingMachineDaoImpl();
         sn.writeLibrary(Snacking);
-        
-    }
 
+    }
 
     //Connects to change file
     @Override
     public BigDecimal Change(ArrayList<Snack> Candy, int candyInList, BigDecimal Payment) {
-        Payment= Payment.subtract(Cost);
+        Payment = Payment.subtract(Cost);
         return Payment;
     }
 
@@ -118,5 +117,11 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         dao.writeLibrary(Candy);
     }
 
-    
+    public void ItemInventory(ArrayList<Snack> Candy, int candyInList) throws noItemInventoryException {
+        if (Candy.get(candyInList).getInventory() <= 0) {
+
+            throw new noItemInventoryException("That food seems to be out of stock. Please choose another item.");
+        }
+    }
+
 }

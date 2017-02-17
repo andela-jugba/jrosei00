@@ -23,7 +23,7 @@ import vendingmachine.dto.Snack;
  */
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
-    VendingMachineDaoImpl Snack;
+    //VendingMachineDaoImpl Snack;
 
     public static final String SNACK_FILE = "VendingMachine";
     public static final String DELIMITER = "::";

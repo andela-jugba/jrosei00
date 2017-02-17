@@ -9,10 +9,10 @@ package vendingmachine.service;
  *
  * @author apprentice
  */
-public class InsufficientFundsException extends Exception {
+public class noItemInventoryException extends Exception {
 
-    public InsufficientFundsException(String noMoney) {
-        super(noMoney);
+    public noItemInventoryException(String Warning) {
+        super(Warning);
     }
     
 }
