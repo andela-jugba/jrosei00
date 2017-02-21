@@ -1,0 +1,17 @@
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/ui/VendingMachineIOImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/service/InsufficientFundsException.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/dto/Snack.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/dao/VendingMachineAuditDaoFileImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/service/VendingMachineServiceLayer.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/ui/VendingMachineIO.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/controller/VendingMachineController.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/dao/VendingMachineDao.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/ui/VendingMachineView.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/dao/VendingMachineAuditDao.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/Application.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/service/VendingMachineServiceLayerImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/dao/VendingMachineDaoImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/dao/VendingMachinePersistenceException.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/advice/LoggingAdvice.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/dto/CoinStack.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_4/VendingMachine_Spring/VendingMachine/src/main/java/vendingmachine/service/noItemInventoryException.java
