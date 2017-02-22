@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import vendingmachine.dao.VendingMachineAuditDao;
 import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
@@ -26,13 +27,19 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     BigDecimal Payment;
     BigDecimal Cost;
     private VendingMachineDao dao;
+    private VendingMachineAuditDao auditDao;
 
-    public VendingMachineServiceLayerImpl(VendingMachineDao myDao) {
+    public VendingMachineServiceLayerImpl(VendingMachineDao myDao, VendingMachineAuditDao auditDao) {
 
         this.dao = myDao;
+        this.auditDao = auditDao;
     }
 
     public VendingMachineServiceLayerImpl() {
+    }
+
+    VendingMachineServiceLayerImpl(VendingMachineDao dao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ArrayList< Snack> getAllFood() {

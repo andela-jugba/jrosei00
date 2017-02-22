@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  *
  * @author apprentice
  */
-public class VendingMachineAuditDaoFileImpl {
+public class VendingMachineAuditDaoFileImpl implements VendingMachineAuditDao {
 
     public static final String AUDIT_FILE = "audit.txt";
 

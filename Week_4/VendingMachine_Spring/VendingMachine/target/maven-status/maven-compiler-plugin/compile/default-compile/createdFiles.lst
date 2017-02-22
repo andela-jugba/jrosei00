@@ -13,6 +13,7 @@ vendingmachine/dao/VendingMachineAuditDaoFileImpl.class
 vendingmachine/ui/VendingMachineIOImpl.class
 vendingmachine/dao/VendingMachineDao.class
 vendingmachine/dao/VendingMachineAuditDao.class
+vendingmachine/dao/VendingMachineDaoImplTest.class
 vendingmachine/ui/VendingMachineView.class
 vendingmachine/ui/VendingMachineView$menuItems.class
 vendingmachine/ui/VendingMachineIO.class

@@ -14,10 +14,6 @@
           http://www.springframework.org/schema/context/spring-context.xsd
           http://www.springframework.org/schema/aop  
           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
-
-    <!-- Bean definitions go here -->
-   
-</beans>
     
     <bean id = "VendingMachineIO" class = "vendingmachine.ui.VendingMachineIOImpl"/>
     
@@ -40,24 +36,24 @@
     </bean>
     
     <bean id = "loggingAdvice" class = "vendingmachine.advice.LoggingAdvice">
-        <constructor-arg ref = "auditDao"/>
+        <constructor-arg ref = "VendingMachineAuditDao"/>
     </bean>
 
     <aop:config>
         <aop:aspect ref = "loggingAdvice">
             <aop:after-returning
                 method = "createAuditEntry"
-                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.updateInventory(...))"
+                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.updateInventory(..))"
             />
             
             <aop:after-returning
                 method = "createAuditEntry"
-                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.ItemInventory(...))"
+                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.ItemInventory(..))"
             />
             
             <aop:after-returning
                 method="createAuditEntry"
-                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.sufficientFunds(...))"
+                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.sufficientFunds(..))"
             />
             
         </aop:aspect>
