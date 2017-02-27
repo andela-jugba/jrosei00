@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package flooringMastery;
+package flooringMastery.dao;
+
+import flooringMastery.dto.Order;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author apprentice
  */
-public class Application {
-
+public class orderDaoImplTraining {
+       
 }

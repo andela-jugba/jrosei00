@@ -99,7 +99,7 @@ public class DVDLibraryView {
     }
 
     public void displayDisplayDVDBanner() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Here is the DVD."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getEIDRNumberChoice() {
@@ -107,11 +107,11 @@ public class DVDLibraryView {
             }
 
     public void displayExitBanner() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Thank you for exiting."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void displayUnknownCommandBanner() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("You have entered a command that does not match."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void displayErrorMessage(String errorMsg) {
