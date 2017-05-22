@@ -23,10 +23,10 @@ import com.sg.dvdlibrary.ui.UserIOConsoleImpl;
 public class App {
     
     public static void main (String [] args) {
-        UserIO myIO = new UserIOConsoleImpl();
-        DVDLibraryView myView = new DVDLibraryView(myIO);
-        DVDLibraryDao myDao = new DVDLibraryDaoFileImpl();
-        DVDLibraryController controller = new DVDLibraryController (myDao, myView);
-        controller.run();
+        UserIO myIO = new UserIOConsoleImpl(); //source from IO
+        DVDLibraryView myView = new DVDLibraryView(myIO); //source from view
+        DVDLibraryDao myDao = new DVDLibraryDaoFileImpl(); //source from dao
+        DVDLibraryController controller = new DVDLibraryController (myDao, myView); //source from controller
+        controller.run(); //controller calls to app does the final run method
     }
 }

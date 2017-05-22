@@ -108,28 +108,34 @@ public class DVDLibraryView {
     public void displayUnknownCommandBanner() {
         io.print("Unknown Command");
     }
-    
+
     public DVD getAndEditInformationBanner() {
         io.print("=== Edit DVDs ===");
+        return null;
     }
 
     public DVDLibraryView(UserIO io) {
         this.io = io;
     }
 
-    public DVD getAndEditDVD(String title, DVD currentDVD) {
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
+    }
+
+    /*public DVD getAndEditDVD(String title, DVD currentDVD) {
         DVD edited = currentDVD;
-        boolean keepLooking = true;
+        boolean keepLooping = true;
 
         if (currentDVD != null) {
             do {
                 String actions = io.readString("What would you like to edit?"
                         + "\n 1. Director's Name"
-                        + "+ \n 2. Release Date"
-                        + "+ \n 3. MPAA Rating"
-                        + "+ \n 4. Studio Name"
-                        + "+ \n 5. Title"
-                        + "+ \n 6. Additional Comments"
+                        + "\n 2. Release Date"
+                        + "\n 3. MPAA Rating"
+                        + "\n 4. Studio Name"
+                        + "\n 5. Title"
+                        + "\n 6. Additional Comments"
                         + "\n 7. Exit");
                 if (actions.equals(1)) {
                     io.print("The current director's name is " + currentDVD.getDirector());
@@ -156,13 +162,12 @@ public class DVDLibraryView {
                     String Comment = io.readString("Enter new comment");
                     edited.setComment(Comment);
                 } else if (actions.equals(7)) {
-                    keepLooping = false;
+                    System.out.println("Goodbye");
                 }
             } while (keepLooping);
         }
         return edited;
     }
     public void displayEditedDVDSuccessBanner() {
-        io.print("You have successfully edited your DVD");
-    }
+        io.print("You have successfully edited your DVD");*/
 }
