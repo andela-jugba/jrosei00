@@ -140,6 +140,15 @@ public class DVDLibraryController {
     
     private DVD Search() {
         
+        view.displaySearchBanner();
+        view.getTitleToSearch();
+        String title = view.getTitleToSearch();
+        dao.Search(title);
+        view.displayNoMatchesFound();
+        DVD dvd = null;
+        view.displayDVD(dvd);
+        return null;
+       
     }
     
 }
