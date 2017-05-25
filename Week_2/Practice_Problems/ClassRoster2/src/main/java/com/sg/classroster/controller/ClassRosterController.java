@@ -6,7 +6,6 @@
 package com.sg.classroster.controller;
 
 import com.sg.classroster.dao.ClassRosterDao;
-import com.sg.classroster.dao.ClassRosterDaoFileImpl;
 import com.sg.classroster.dto.Student;
 import com.sg.classroster.ui.UserIO;
 import com.sg.classroster.ui.UserIOConsoleImpl;
@@ -91,7 +90,7 @@ public class ClassRosterController {
     public void exitMessage() {
         view.displayExitBanner();
     }
-    
+
     public ClassRosterController(ClassRosterDao dao, ClassRosterView view) {
         this.dao = dao;
         this.view = view;

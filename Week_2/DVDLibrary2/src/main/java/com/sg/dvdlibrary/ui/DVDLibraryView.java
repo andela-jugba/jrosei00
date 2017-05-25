@@ -16,7 +16,7 @@ public class DVDLibraryView {
 
     private UserIO io;
 
-    public int printMenuAndGetSelection() {
+    public int printMenuAndSelection() {
         io.print("Main Menu");
         io.print("1. Add DVD");
         io.print("2. Remove DVD");
@@ -28,6 +28,43 @@ public class DVDLibraryView {
 
         return io.readInt("Please select from the following:", 1, 7);
     }
+    
+    //check
+    /*
+    public String makeChange (String currentInfo, String infoField) {
+        io.print("Current " + infoField + ": " + currentInfo);
+        if (input.length() < 1) {
+            return currentInfo;
+        } else {
+            return input;
+       
+    */
+    
+    //check
+    /*
+    public DVD editDVDInfo(DVD DVDToEdit) {
+        String title = DVDToEdit.getTitle();
+        int date = Integer.parseInt((DVDToEdit.getDate()));
+        String mpaa = makeChange(DVDToEdit.getMpaa(), "MPAA Rating");
+        String director = makeChange(DVDToEdit.getDirector(), "Director");
+        String studio = makeChange(DVDToEdit.getStudio(), "Studio");
+        String comment = makeChange(DVDToEdit.getComment(), "Comments");
+        DVD updatedDVD = new DVD(title);
+        updatedDVD.setTitle(title);
+        updatedDVD.setDate(date);
+        updatedDVD.setMpaa(mpaa);
+        updatedDVD.setDirector(director);
+        updatedDVD.setStudio(studio);
+        updatedDVD.setComment(comment);
+        return updatedDVD;   
+    }
+    
+        public DVD getAndEditInformationBanner() {
+        io.print("=== Edit DVDs ===");
+        return null;
+    }
+    
+    */
 
     public DVD getNewDVDInfo() {
         String title = io.readString("Please enter title name");
@@ -45,10 +82,27 @@ public class DVDLibraryView {
         currentDVD.setComment(comment);
         return currentDVD;
     }
+    
+    public void displaySearchBanner() {
+        io.print("=== Search for DVD ===");
+    }
+    
+    public void displayNoMatchesFound() {
+        io.print("No title is on record.");
+    }
+    
+    public void displayEditDVDBanner() {
+        io.print("=== Edit existing DVD ===");
+    }
 
     public void displayCreateDVDBanner() {
         io.print("=== Create DVD ===");
     }
+    
+    public void displaySuccessEditedDVDBanner() {
+        io.print("DVD successfully edited. Please hit enter to continue");
+    }
+    
 
     public void displayCreateSuccessDVDBanner() {
         io.print("DVD added successfully. Plese hit enter to continue");
@@ -109,18 +163,8 @@ public class DVDLibraryView {
         io.print("Unknown Command");
     }
 
-    public DVD getAndEditInformationBanner() {
-        io.print("=== Edit DVDs ===");
-        return null;
-    }
-
     public DVDLibraryView(UserIO io) {
         this.io = io;
-    }
-
-    public void displayErrorMessage(String errorMsg) {
-        io.print("=== ERROR ===");
-        io.print(errorMsg);
     }
 
     /*public DVD getAndEditDVD(String title, DVD currentDVD) {
@@ -170,4 +214,15 @@ public class DVDLibraryView {
     }
     public void displayEditedDVDSuccessBanner() {
         io.print("You have successfully edited your DVD");*/
+public void displayTitleList (List<String> titleList) {
+    io.print(" === Here is a list of all titles on file ===");
+    for (String currentTitle : titleList) {
+        
+    }
 }
+    public String getTitleToSearch() {
+        String title = io.readString("Please give a title from the list above.");
+        return title;
+    }
+}
+

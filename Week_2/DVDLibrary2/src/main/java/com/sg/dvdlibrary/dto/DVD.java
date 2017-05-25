@@ -73,7 +73,7 @@ public class DVD {
     /**
      * @param directior the director to set
      */
-    public void setDirector(String directior) {
+    public void setDirector(String director) {
         this.director = director;
     }
 

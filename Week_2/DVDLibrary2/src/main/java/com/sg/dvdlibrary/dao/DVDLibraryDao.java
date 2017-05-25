@@ -14,12 +14,18 @@ import java.util.List;
  */
 public interface DVDLibraryDao {
     
-    DVD addDVD (String title, DVD dvd) throws DVDLibraryDaoException; // obj for DVD with title identifier
+    DVD addDVD (String title, DVD dvd); // obj for DVD with title identifier
     
-    List<DVD>getAllDVDs() throws DVDLibraryDaoException; //hashmap for getting all DVDs with method
+    List<DVD>getAllDVDs(); //hashmap for getting all DVDs with method
         
-    DVD getDVD (String title) throws DVDLibraryDaoException; //method to get single DVD with title identifier
+    DVD getDVD (String title); //method to get single DVD with title identifier
     
-    DVD removeDVD (String title) throws DVDLibraryDaoException; //method with title identifier
+    DVD removeDVD (String title); //method with title identifier
+   
+    /*DVD addUpdatedDVD(DVD dvd);*/
+    
+    DVD editDVDInfo (DVD dvd);
+    
+    DVD Search(String title);
     
 }

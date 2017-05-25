@@ -55,6 +55,7 @@ public class ClassRosterView {
         }
         io.print("Please hit enter to continue.");
     }
+    
     public void displayDisplayAllBanner() {
         io.print("=== Display All Students ===");
     }
