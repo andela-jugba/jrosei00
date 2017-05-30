@@ -105,7 +105,8 @@ public class DVDLibraryController {
     private void editDVDInfo() {
         view.displayEditDVDBanner();
         String title = view.getDVDTitleChoice();
-        DVD dvd = view.getNewDVDInfo();
+        DVD movie = dao.Search(title);
+        DVD dvd = view.editDVDInfo(movie);
         dao.editDVDInfo(dvd);
         view.displaySuccessEditedDVDBanner();
     }
@@ -138,6 +139,8 @@ public class DVDLibraryController {
      
     }*/
     
+    
+    
     private DVD Search() {
         
         view.displaySearchBanner();
@@ -145,9 +148,8 @@ public class DVDLibraryController {
         String title = view.getTitleToSearch();
         dao.Search(title);
         view.displayNoMatchesFound();
-        DVD dvd = null;
-        view.displayDVD(dvd);
-        return null;
+        view.displayDVD(dvd);//after being replaced
+        return newDVD;
        
     }
     

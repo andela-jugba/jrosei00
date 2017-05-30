@@ -30,15 +30,18 @@ public class DVDLibraryView {
     }
     
     //check
-    /*
+    
     public String makeChange (String currentInfo, String infoField) {
+        
         io.print("Current " + infoField + ": " + currentInfo);
+        String input = io.readString(infoField);
         if (input.length() < 1) {
             return currentInfo;
         } else {
             return input;
        
-    */
+        }
+    }
     
     //check
     /*
@@ -224,5 +227,18 @@ public void displayTitleList (List<String> titleList) {
         String title = io.readString("Please give a title from the list above.");
         return title;
     }
+    
+        public DVD editDVDInfo(DVD DVDToEdit) {
+           
+        
+        String title = DVDToEdit.getTitle();
+        int date = Integer.parseInt(makeChange(Integer.toString(DVDToEdit.getDate()), "Date"));
+        String mpaa = makeChange(DVDToEdit.getMpaa(), "MPAA Rating");
+        
+        String director = makeChange(DVDToEdit.getDirector(), "Director");
+        String studio = makeChange(DVDToEdit.getStudio(), "Studio");
+        String comment = makeChange(DVDToEdit.getComment(), "Comments");
+        DVD newDVD = new DVD; 
+        }
 }
 

@@ -130,12 +130,12 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
     }
 
     public DVD editDVDInfo(DVD DVDToEdit) {
-        String title = DVDToEdit.getTitle();
-        int date = Integer.parseInt(makeChange(Integer.toString(DVDToEdit.getDate()), "Date"));
-        String mpaa = makeChange(DVDToEdit.getMpaa(), "MPAA Rating");
-        String director = makeChange(DVDToEdit.getDirector(), "Director");
-        String studio = makeChange(DVDToEdit.getStudio(), "Studio");
-        String comment = makeChange(DVDToEdit.getComment(), "Comments");
+       //String title = DVDToEdit.getTitle();
+       //int date = Integer.parseInt(makeChange(Integer.toString(DVDToEdit.getDate()), "Date"));
+       //String mpaa = makeChange(DVDToEdit.getMpaa(), "MPAA Rating");
+       //String director = makeChange(DVDToEdit.getDirector(), "Director");
+       //String studio = makeChange(DVDToEdit.getStudio(), "Studio");
+       //String comment = makeChange(DVDToEdit.getComment(), "Comments");
         DVD updatedDVD = new DVD(title);
         updatedDVD.setTitle(title);
         updatedDVD.setDate(date);
