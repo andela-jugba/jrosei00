@@ -5,10 +5,8 @@
  */
 package vendingmachine.service;
 
-import com.sun.istack.internal.logging.Logger;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.logging.Level;
 import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
@@ -73,7 +71,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     @Override
-    public BigDecimal Change(ArrayList<Fad> UglyItem, int candyInList, BigDecimal Payment) {
+    public BigDecimal Change(ArrayList<Fad> UglyItem, int Inventory, BigDecimal Payment) {
         insertedAmount = insertedAmount.subtract(Price);
         return insertedAmount;
     }

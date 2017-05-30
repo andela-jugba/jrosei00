@@ -19,11 +19,11 @@ public interface VendingMachineServiceLayer {
        
 public ArrayList< Fad > Read();
 
-    public void sufficientFunds(ArrayList< Fad > UglyItem, int candyInList, BigDecimal Payment) throws InsufficientFundsException;
+    public void sufficientFunds(ArrayList< Fad > UglyItem, int Inventory, BigDecimal Payment) throws InsufficientFundsException;
 
     public void updateInventory(ArrayList< Fad > UglyItem, int Inventory) throws VendingMachinePersistenceException;
 
-    public BigDecimal Change(ArrayList< Fad > UglyItem, int candyInList, BigDecimal Payment);
+    public BigDecimal Change(ArrayList< Fad > UglyItem, int Inventory, BigDecimal Payment);
 
     public Change changeToCoins(BigDecimal Change);
     
