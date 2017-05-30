@@ -65,14 +65,13 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
             getUglyItem = item.Read();
             return getUglyItem;
         } catch (VendingMachinePersistenceException e) {
-            //Logger.getLogger(VendingMachineServiceLayerImpl.class.getName()).log(Level.SEVERE, null, e);
-        }
+            System.out.println(e.getMessage());        }
         return null;
     }
 
     @Override
     public BigDecimal Change(ArrayList<Fad> UglyItem, int Inventory, BigDecimal Payment) {
-        insertedAmount = insertedAmount.subtract(Price);
+        insertedAmount = Payment.subtract(Price);
         return insertedAmount;
     }
 

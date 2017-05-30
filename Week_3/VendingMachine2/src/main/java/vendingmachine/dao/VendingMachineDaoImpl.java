@@ -22,7 +22,7 @@ import vendingmachine.dto.Fad;
  */
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
-    public static final String Fads_90s = "Fads_90s.txt";
+    public static final String Fad_90s = "Fad_90s.txt";
     public static final String DELIMITER = " :: ";
 
     public ArrayList< Fad> Read() throws VendingMachinePersistenceException {
@@ -30,14 +30,14 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         Scanner scanner;
 
         try {
-            scanner = new Scanner(new BufferedReader(new FileReader(Fads_90s)));
+            scanner = new Scanner(new BufferedReader(new FileReader(Fad_90s)));
         } catch (FileNotFoundException e) {
             throw new VendingMachinePersistenceException("Could not load vending machine menu.", e);
         }
 
         String currentLine;
         String[] currentTokens;
-        ArrayList< Fad> Items = new ArrayList();
+        ArrayList< Fad> items = new ArrayList();
 
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
@@ -45,21 +45,22 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
             Fad currentFad = new Fad(currentTokens[0]);
             currentFad.setPrice(new BigDecimal(currentTokens[1]));
             currentFad.setInventory(Integer.parseInt(currentTokens[2]));
-            Items.add(currentFad);
+            items.add(currentFad);
         }
-        return Items;
+        return items;
     }
 
-    public void Write(ArrayList < Fad > Commemorating) throws VendingMachinePersistenceException {
+    @Override
+    public void write(ArrayList < Fad > commemorating) throws VendingMachinePersistenceException {
         PrintWriter out;
         
         try {
-            out = new PrintWriter (new FileWriter(Fads_90s));
+            out = new PrintWriter (new FileWriter(Fad_90s));
         } catch (IOException e) {
             throw new VendingMachinePersistenceException ("Could not save 90s ugly fads", e);
         }
         
-        for (Fad currentFad : Commemorating) {
+        for (Fad currentFad : commemorating) {
             out.println(currentFad.getItem() + DELIMITER
             + currentFad.getPrice() + DELIMITER
             + currentFad.getInventory());
@@ -67,10 +68,5 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         }
         out.close();
 
-    }
-
-    @Override
-    public void write(ArrayList<Fad> Commemorating) throws VendingMachinePersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

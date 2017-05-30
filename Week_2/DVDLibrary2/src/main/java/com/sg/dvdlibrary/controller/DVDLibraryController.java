@@ -46,7 +46,7 @@ public class DVDLibraryController {
                     viewDVD();
                     break;
                 case 6:
-                    io.print("search");
+                    Search();
                     break;
                 case 7:
                     keepGoing = false;
@@ -138,19 +138,18 @@ public class DVDLibraryController {
         }
      
     }*/
-    
-    
-    
     private DVD Search() {
-        
         view.displaySearchBanner();
         view.getTitleToSearch();
         String title = view.getTitleToSearch();
         dao.Search(title);
-        view.displayNoMatchesFound();
-        view.displayDVD(dvd);//after being replaced
-        return newDVD;
-       
+        if (title.length() >= 1) {
+            view.displayDVD(dvd);
+            return newDVD;//after being replaced
+        } else {
+            view.displayNoMatchesFound();
+        }
+        return null;
+
     }
-    
 }

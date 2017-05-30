@@ -136,14 +136,14 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
        //String director = makeChange(DVDToEdit.getDirector(), "Director");
        //String studio = makeChange(DVDToEdit.getStudio(), "Studio");
        //String comment = makeChange(DVDToEdit.getComment(), "Comments");
-        DVD updatedDVD = new DVD(title);
-        updatedDVD.setTitle(title);
-        updatedDVD.setDate(date);
-        updatedDVD.setMpaa(mpaa);
-        updatedDVD.setDirector(director);
-        updatedDVD.setStudio(studio);
-        updatedDVD.setComment(comment);
-        return updatedDVD;
+        //DVD updatedDVD = new DVD(title);
+        //updatedDVD.setTitle(title);
+        //updatedDVD.setDate(date);
+       // updatedDVD.setMpaa(mpaa);
+        //updatedDVD.setDirector(director);
+        //updatedDVD.setStudio(studio);
+        //updatedDVD.setComment(comment);
+        return DVDToEdit;
     }
 
     @Override

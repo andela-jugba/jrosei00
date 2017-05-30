@@ -32,22 +32,22 @@ public class VendingMachineView {
         return insertedAmount;
     }
 
-    public int menuItems(List< Fad> Style) {
+    public int menuItems(List< Fad> style) {
 
         io.print(" === Menu === ");
-        io.print("1  |" + Style.get(0).getItem() + " ----------" + Style.get(0).getPrice());
-        io.print("2  |" + Style.get(1).getItem() + " ----------" + Style.get(1).getPrice());
-        io.print("3  |" + Style.get(2).getItem() + " ----------" + Style.get(2).getPrice());
-        io.print("4  |" + Style.get(3).getItem() + " ----------" + Style.get(3).getPrice());
-        io.print("5  |" + Style.get(4).getItem() + " ----------" + Style.get(4).getPrice());
-        io.print("6  |" + Style.get(5).getItem() + " ----------" + Style.get(5).getPrice());
+        io.print("1  |" + style.get(0).getItem() + " ----------" + style.get(0).getPrice());
+        io.print("2  |" + style.get(1).getItem() + " ----------" + style.get(1).getPrice());
+        io.print("3  |" + style.get(2).getItem() + " ----------" + style.get(2).getPrice());
+        io.print("4  |" + style.get(3).getItem() + " ----------" + style.get(3).getPrice());
+        io.print("5  |" + style.get(4).getItem() + " ----------" + style.get(4).getPrice());
+       // io.print("6  |" + style.get(5).getItem() + " ----------" + style.get(5).getPrice());
 
-        int Selection = io.readInt("Please insert amount.");
+        int Selection = io.readInt("Please insert menu item.");
         Selection -= 1;
         return Selection;
     }
 
-    public int LeftoverMoney(Change coins, BigDecimal change) {
+    public int leftoverMoney(Change coins, BigDecimal change) {
 
         io.print("Your change is " + change);
         io.print("Quarters: " + coins.getQuarter());

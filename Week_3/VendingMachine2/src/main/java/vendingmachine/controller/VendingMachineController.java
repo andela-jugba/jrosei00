@@ -23,54 +23,44 @@ public class VendingMachineController {
     
     VendingMachineView view;
     VendingMachineServiceLayer service;
-
-    public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView io) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    public void VendingMachineController (VendingMachineServiceLayer service, VendingMachineView view) {
+    public VendingMachineController (VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
         this.view = view;
     }
     
     public void run() throws VendingMachinePersistenceException {
         
-        BigDecimal Price;
-        int Item;
+        BigDecimal price;
+        int item;
         boolean statement = false;
         
-        ArrayList < Fad > Items = new ArrayList<>();
+        ArrayList < Fad > items = new ArrayList<>();
         
-        Items = service.Read();
-        Item = view.menuItems(Items);
-        Price = view.insertMoney();
+        items = service.Read();
+        item = view.menuItems(items);
+        price = view.insertMoney();
         
         try {
-            service.sufficientFunds (Items, Item, Price);
+            service.sufficientFunds (items, item, price);
         } catch (InsufficientFundsException e) {
             
-        }
+        }       
         
         try {
-            service.sufficientFunds (Items, Item, Price);
-        } catch (InsufficientFundsException e) {
-            
-        }
-        
-        try {
-            service.ItemInventory(Items, Item);
+            service.ItemInventory(items, item);
         } catch (NoItemInventoryException e) {
             statement = true;
+            System.out.println("Unfortauntely we are out of this product. Please choose another.");
         }
         
         if (statement == false) {
-            service.updateInventory(Items, Item);
+            service.updateInventory(items, item);
             
-            BigDecimal change = service.Change(Items, Item, Price);
+            BigDecimal change = service.Change(items, item, price);
             Change coins = service.changeToCoins(change);
-            view.LeftoverMoney(coins, change);
-                    
-             
+            view.leftoverMoney(coins, change);
+                             
         }
     }
 }

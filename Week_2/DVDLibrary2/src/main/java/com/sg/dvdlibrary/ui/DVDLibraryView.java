@@ -28,21 +28,20 @@ public class DVDLibraryView {
 
         return io.readInt("Please select from the following:", 1, 7);
     }
-    
+
     //check
-    
-    public String makeChange (String currentInfo, String infoField) {
-        
+    public String makeChange(String currentInfo, String infoField) {
+
         io.print("Current " + infoField + ": " + currentInfo);
         String input = io.readString(infoField);
         if (input.length() < 1) {
             return currentInfo;
         } else {
             return input;
-       
+
         }
     }
-    
+
     //check
     /*
     public DVD editDVDInfo(DVD DVDToEdit) {
@@ -67,8 +66,7 @@ public class DVDLibraryView {
         return null;
     }
     
-    */
-
+     */
     public DVD getNewDVDInfo() {
         String title = io.readString("Please enter title name");
         int date = io.readInt("Please enter release date");
@@ -85,15 +83,15 @@ public class DVDLibraryView {
         currentDVD.setComment(comment);
         return currentDVD;
     }
-    
+
     public void displaySearchBanner() {
         io.print("=== Search for DVD ===");
     }
-    
+
     public void displayNoMatchesFound() {
         io.print("No title is on record.");
     }
-    
+
     public void displayEditDVDBanner() {
         io.print("=== Edit existing DVD ===");
     }
@@ -101,11 +99,10 @@ public class DVDLibraryView {
     public void displayCreateDVDBanner() {
         io.print("=== Create DVD ===");
     }
-    
+
     public void displaySuccessEditedDVDBanner() {
         io.print("DVD successfully edited. Please hit enter to continue");
     }
-    
 
     public void displayCreateSuccessDVDBanner() {
         io.print("DVD added successfully. Plese hit enter to continue");
@@ -217,28 +214,35 @@ public class DVDLibraryView {
     }
     public void displayEditedDVDSuccessBanner() {
         io.print("You have successfully edited your DVD");*/
-public void displayTitleList (List<String> titleList) {
-    io.print(" === Here is a list of all titles on file ===");
-    for (String currentTitle : titleList) {
-        
+    public void displayTitleList(List<String> titleList) {
+        io.print(" === Here is a list of all titles on file ===");
+        for (String currentTitle : titleList) {
+
+        }
     }
-}
+
     public String getTitleToSearch() {
         String title = io.readString("Please give a title from the list above.");
         return title;
     }
-    
-        public DVD editDVDInfo(DVD DVDToEdit) {
-           
-        
+
+    public DVD editDVDInfo(DVD DVDToEdit) {
+
         String title = DVDToEdit.getTitle();
         int date = Integer.parseInt(makeChange(Integer.toString(DVDToEdit.getDate()), "Date"));
         String mpaa = makeChange(DVDToEdit.getMpaa(), "MPAA Rating");
-        
+
         String director = makeChange(DVDToEdit.getDirector(), "Director");
         String studio = makeChange(DVDToEdit.getStudio(), "Studio");
         String comment = makeChange(DVDToEdit.getComment(), "Comments");
-        DVD newDVD = new DVD; 
-        }
-}
+        DVD newDVD = new DVD();
+        newDVD.setTitle(title);
+        newDVD.setDate(date);
+        newDVD.setMpaa(mpaa);
+        newDVD.setDirector(director);
+        newDVD.setStudio(studio);
+        newDVD.setComment(comment);
 
+        return newDVD;
+    }
+}
