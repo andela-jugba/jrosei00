@@ -9,6 +9,9 @@ import com.sg.dvdlibrary.dto.DVD;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,28 +31,34 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
     @Override
     public DVD addDVD(String title, DVD dvd) {
         DVD newDVD = dvds.put(title, dvd);
+        writeList();
         return newDVD; // ID of new DVD and using put method to add
     }
 
     @Override
     public List<DVD> getAllDVDs() {
+        loadList();
         return new ArrayList<DVD>(dvds.values());
     }
 
     @Override
     public DVD getDVD(String title) {
+        loadList();
+
         return dvds.get(title);
+
     }
 
     @Override
     public DVD removeDVD(String title) {
         DVD removedDVD = dvds.remove(title);
+        writeList();
         return removedDVD;
     }
 
     /*@Override
     public DVD editDVDInformation(String title, String oldValue, String newValue) {
-        loadList();
+        loadList();:
         DVD newDVD = dvds.
         return newDVD;
      */
@@ -116,7 +125,6 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
         }
 
     }*/
-
     public String makeChange(String currentInfo, String infoField) {
 
         String input = "";
@@ -130,16 +138,18 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
     }
 
     public DVD editDVDInfo(DVD DVDToEdit) {
-       //String title = DVDToEdit.getTitle();
-       //int date = Integer.parseInt(makeChange(Integer.toString(DVDToEdit.getDate()), "Date"));
-       //String mpaa = makeChange(DVDToEdit.getMpaa(), "MPAA Rating");
-       //String director = makeChange(DVDToEdit.getDirector(), "Director");
-       //String studio = makeChange(DVDToEdit.getStudio(), "Studio");
-       //String comment = makeChange(DVDToEdit.getComment(), "Comments");
+        DVD newDVD = dvds.put(DVDToEdit.getTitle(), DVDToEdit);
+        writeList();
+        //String title = DVDToEdit.getTitle();
+        //int date = Integer.parseInt(makeChange(Integer.toString(DVDToEdit.getDate()), "Date"));
+        //String mpaa = makeChange(DVDToEdit.getMpaa(), "MPAA Rating");
+        //String director = makeChange(DVDToEdit.getDirector(), "Director");
+        //String studio = makeChange(DVDToEdit.getStudio(), "Studio");
+        //String comment = makeChange(DVDToEdit.getComment(), "Comments");
         //DVD updatedDVD = new DVD(title);
         //updatedDVD.setTitle(title);
         //updatedDVD.setDate(date);
-       // updatedDVD.setMpaa(mpaa);
+        // updatedDVD.setMpaa(mpaa);
         //updatedDVD.setDirector(director);
         //updatedDVD.setStudio(studio);
         //updatedDVD.setComment(comment);
@@ -148,24 +158,14 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
     @Override
     public DVD Search(String title) {
-        Scanner sc = null;
-        DVD searchDVD = new DVD(title);
-        String input = "";
-        sc = new Scanner(DVD_Library);
-        while (sc.hasNextLine()) {
-            input = sc.nextLine();
-            if (input.contains(title)) {
-                System.out.println(title + " exists.");
-            } else {
-                System.out.println("No movies exist.");
+        for (DVD movies : getAllDVDs()) {
+            if (title.equals(movies.getTitle())) {
+                return movies;
             }
         }
-        return searchDVD;
-
+        return null;
     }
-}
 
-    /*
     private void writeList() {
 
         PrintWriter out = null;
@@ -190,24 +190,25 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
         //clean up
         out.close();
     }
+}
 
-    /*
-    //check these
-    @Override
-    public DVD addUpdatedDVD(DVD dvd) {
+/*
+//check these
+@Override
+        public DVD addUpdatedDVD(DVD dvd) {
         DVD updatedDVD = dvds.put(dvd.getTitle(), dvd);
         writeList();
         return updatedDVD;
     }
 
     @Override
-    public List<DVD> getAllDVDTitles() {
+        public List<DVD> getAllDVDTitles() {
         loadList();
         return new ArrayList<>(dvds.values());
     }
 
     @Override
-    public DVD editDVD(int dvdID) {
+        public DVD editDVD(int dvdID) {
         loadList();
         return null;
     }*/

@@ -140,12 +140,11 @@ public class DVDLibraryController {
     }*/
     private DVD Search() {
         view.displaySearchBanner();
-        view.getTitleToSearch();
         String title = view.getTitleToSearch();
-        dao.Search(title);
-        if (title.length() >= 1) {
-            view.displayDVD(dvd);
-            return newDVD;//after being replaced
+        DVD film = dao.Search(title);
+        if (film != null) {
+            view.displayMatchesFound();
+            view.displayDVD(film);//after being replaced
         } else {
             view.displayNoMatchesFound();
         }

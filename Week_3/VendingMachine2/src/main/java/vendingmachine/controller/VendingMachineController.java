@@ -44,6 +44,7 @@ public class VendingMachineController {
         try {
             service.sufficientFunds (items, item, price);
         } catch (InsufficientFundsException e) {
+            System.out.println("You have not inserted enough money.");
             
         }       
         

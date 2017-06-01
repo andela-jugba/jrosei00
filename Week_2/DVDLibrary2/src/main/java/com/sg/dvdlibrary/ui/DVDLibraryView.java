@@ -91,6 +91,10 @@ public class DVDLibraryView {
     public void displayNoMatchesFound() {
         io.print("No title is on record.");
     }
+    
+    public void displayMatchesFound() {
+        io.print("DVD is on record.");
+    }
 
     public void displayEditDVDBanner() {
         io.print("=== Edit existing DVD ===");

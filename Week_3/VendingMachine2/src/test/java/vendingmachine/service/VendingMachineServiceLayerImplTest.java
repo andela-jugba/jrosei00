@@ -88,7 +88,7 @@ public class VendingMachineServiceLayerImplTest {
     /**
      * Test of numberOfCoins method, of class VendingMachineServiceLayerImpl.
      */
-    @Test
+    @Test            
     public void testNumberOfCoins() {
         System.out.println("numberOfCoins");
         BigDecimal Change = null;
