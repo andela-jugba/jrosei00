@@ -35,7 +35,7 @@ public class VendingMachineView {
     public int menuItems(List< Fad> style) {
 
         io.print(" === Menu === ");
-        for (int i = 1; i < style.size(); i++) {
+        for (int i = 0; i < style.size(); i++) {
 
             io.print(i + "|" + style.get(i).getItem() + " ----------" + style.get(i).getPrice());
             //io.print("2  |" + style.get(1).getItem() + " ----------" + style.get(1).getPrice());
@@ -46,7 +46,6 @@ public class VendingMachineView {
 
         }
         int Selection = io.readInt("Please insert menu item.");
-        Selection -= 1;
         return Selection;
 
     }

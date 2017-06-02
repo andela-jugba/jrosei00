@@ -20,35 +20,18 @@ import vendingmachine.dto.Fad;
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
     BigDecimal insertedAmount;
-    BigDecimal Price;
     private VendingMachineDao dao;
 
     public VendingMachineServiceLayerImpl(VendingMachineDao myDao) {
         this.dao = myDao;
     }
 
-    public VendingMachineServiceLayerImpl() {
-
-    }
-
-    public void Write(ArrayList< Fad> Commemorating) throws VendingMachinePersistenceException {
-        VendingMachineDao item = new VendingMachineDaoImpl();
-        item.write(Commemorating);
-    }
-
     public void sufficientFunds(ArrayList< Fad> UglyItem, int Inventory, BigDecimal insertedAmount) throws InsufficientFundsException {
-        Price = UglyItem.get(Inventory).getPrice();
+        BigDecimal Price = UglyItem.get(Inventory).getPrice();
 
         if (insertedAmount.compareTo(Price) < 0) {
             throw new InsufficientFundsException("Please insert the correct amount.");
         }
-    }
-
-    public void updateInventory(ArrayList< Fad> UglyItem, int Inventory) throws VendingMachinePersistenceException {
-        int inventory = UglyItem.get(Inventory).getInventory();
-        inventory -= 1;
-        UglyItem.get(Inventory).setInventory(inventory);
-        dao.write(UglyItem);
     }
 
     public void ItemInventory(ArrayList< Fad> UglyItem, int Inventory) throws NoItemInventoryException {
@@ -58,20 +41,20 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     @Override
-    public ArrayList<Fad> Read() {
+    public ArrayList<Fad> getAllItems() {
         try {
-            VendingMachineDao item = new VendingMachineDaoImpl();
             ArrayList< Fad> getUglyItem = new ArrayList<>();
-            getUglyItem = item.Read();
+            getUglyItem = dao.getAllItems();
             return getUglyItem;
         } catch (VendingMachinePersistenceException e) {
-            System.out.println(e.getMessage());        }
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     @Override
-    public BigDecimal Change(ArrayList<Fad> UglyItem, int Inventory, BigDecimal Payment) {
-        insertedAmount = Payment.subtract(Price);
+    public BigDecimal Change(Fad item, int Inventory, BigDecimal Payment) {
+        insertedAmount = Payment.subtract(item.getPrice());
         return insertedAmount;
     }
 
@@ -111,5 +94,15 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         coins.setNickel(Nickel);
         coins.setPenny(Penny);
         return coins;
+    }
+
+    @Override
+    public void updateInventory(ArrayList<Fad> UglyItem, int Inventory) throws VendingMachinePersistenceException {
+        dao.updateInventory(Inventory);
+    }
+
+    @Override
+    public Fad getItem(int Selection) throws VendingMachinePersistenceException {
+        return dao.getItem(Selection);
     }
 }

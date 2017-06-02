@@ -16,16 +16,19 @@ import vendingmachine.dto.Fad;
  * @author apprentice
  */
 public interface VendingMachineServiceLayer {
-       
-public ArrayList< Fad > Read();
 
-    public void sufficientFunds(ArrayList< Fad > UglyItem, int Inventory, BigDecimal Payment) throws InsufficientFundsException;
+    public ArrayList< Fad> getAllItems();
 
-    public void updateInventory(ArrayList< Fad > UglyItem, int Inventory) throws VendingMachinePersistenceException;
+    public void sufficientFunds(ArrayList< Fad> UglyItem, int Inventory, BigDecimal Payment) throws InsufficientFundsException;
 
-    public BigDecimal Change(ArrayList< Fad > UglyItem, int Inventory, BigDecimal Payment);
+    public void updateInventory(ArrayList< Fad> UglyItem, int Inventory) throws VendingMachinePersistenceException;
+
+    public BigDecimal Change(Fad item, int Inventory, BigDecimal Payment);
 
     public Change changeToCoins(BigDecimal Change);
-    
-    public void ItemInventory(ArrayList < Fad > UglyItem, int Inventory) throws NoItemInventoryException;
+
+    public void ItemInventory(ArrayList< Fad> UglyItem, int Inventory) throws NoItemInventoryException;
+
+    public Fad getItem(int Selection) throws VendingMachinePersistenceException;
+
 }

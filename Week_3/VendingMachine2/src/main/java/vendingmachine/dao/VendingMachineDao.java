@@ -14,7 +14,9 @@ import vendingmachine.dto.Fad;
  */
 public interface VendingMachineDao {
  
-    public ArrayList < Fad > Read() throws VendingMachinePersistenceException;
+    public ArrayList < Fad > getAllItems() throws VendingMachinePersistenceException;
     
-    public void write (ArrayList < Fad > Commemorating) throws VendingMachinePersistenceException;
+    public void updateInventory(int Index) throws VendingMachinePersistenceException;
+    
+    public Fad getItem (int Selection) throws VendingMachinePersistenceException;
 }

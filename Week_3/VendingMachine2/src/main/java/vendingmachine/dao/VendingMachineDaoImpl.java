@@ -23,9 +23,11 @@ import vendingmachine.dto.Fad;
 public class VendingMachineDaoImpl implements VendingMachineDao {
 
     public static final String Fad_90s = "Fad_90s.txt";
-    public static final String DELIMITER = " :: ";
+    public static final String DELIMITER = "::";
 
-    public ArrayList< Fad> Read() throws VendingMachinePersistenceException {
+    ArrayList< Fad> items = new ArrayList();
+
+    private ArrayList< Fad> Read() throws VendingMachinePersistenceException {
 
         Scanner scanner;
 
@@ -37,7 +39,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
 
         String currentLine;
         String[] currentTokens;
-        ArrayList< Fad> items = new ArrayList();
+        items = new ArrayList();
 
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
@@ -50,23 +52,41 @@ public class VendingMachineDaoImpl implements VendingMachineDao {
         return items;
     }
 
-    @Override
-    public void write(ArrayList < Fad > commemorating) throws VendingMachinePersistenceException {
+    private void write(ArrayList< Fad> commemorating) throws VendingMachinePersistenceException {
         PrintWriter out;
-        
+
         try {
-            out = new PrintWriter (new FileWriter(Fad_90s));
+            out = new PrintWriter(new FileWriter(Fad_90s));
         } catch (IOException e) {
-            throw new VendingMachinePersistenceException ("Could not save 90s ugly fads", e);
+            throw new VendingMachinePersistenceException("Could not save ugly 90s fads :)", e);
         }
-        
+
         for (Fad currentFad : commemorating) {
             out.println(currentFad.getItem() + DELIMITER
-            + currentFad.getPrice() + DELIMITER
-            + currentFad.getInventory());
+                    + currentFad.getPrice() + DELIMITER
+                    + currentFad.getInventory());
             out.flush();
         }
         out.close();
-
     }
+
+    @Override
+    public ArrayList<Fad> getAllItems() throws VendingMachinePersistenceException {
+        return Read();
+    }
+
+    @Override
+    public void updateInventory(int Index) throws VendingMachinePersistenceException {
+        getAllItems();
+        int inventory = items.get(Index).getInventory();
+        inventory -= 1;
+        items.get(Index).setInventory(inventory);
+        write(items);
+    }
+
+    @Override
+    public Fad getItem(int Selection) throws VendingMachinePersistenceException {
+        return items.get(Selection);
+    }
+
 }
