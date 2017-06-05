@@ -1,0 +1,15 @@
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/dao/ClassRosterAuditDaoFileImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/App.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/ui/ClassRosterView.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/service/ClassRosterDataValidationException.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/service/ClassRosterServiceLayerImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/ui/UserIOConsoleImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/dto/Student.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/dao/ClassRosterDaoFileImpl.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/dao/ClassRosterPersistenceException.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/ui/UserIO.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/controller/ClassRosterController.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/service/ClassRosterServiceLayer.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/dao/ClassRosterDao.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/dao/ClassRosterAuditDao.java
+/home/apprentice/jessica-rosenauer-individual-work/Week_2/Practice_Problems/ClassRoster2/src/main/java/com/sg/classroster/service/ClassRosterDuplicateIdException.java

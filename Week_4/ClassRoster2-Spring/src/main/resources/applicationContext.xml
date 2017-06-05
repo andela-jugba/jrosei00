@@ -22,7 +22,7 @@
         <constructor-arg ref="userIO"/>
     </bean>
    
-    <bean id="classRosterDao" 
+    <bean id="ClassRosterDao" 
          class="com.sg.classroster.dao.ClassRosterDaoFileImpl"/>
    
     <bean id="auditDao" 
