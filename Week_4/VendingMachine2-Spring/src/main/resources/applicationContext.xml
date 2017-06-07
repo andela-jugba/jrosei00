@@ -19,7 +19,7 @@
     <bean id = "userIO" class = "vendingmachine.ui.VendingMachineIOImpl"/>
     
     <bean id = "view" class = "vendingmachine.ui.VendingMachineView">
-        <constructor-arg ref = "VendingMachineIO"/>
+        <constructor-arg ref = "userIO"/>
     </bean>
     
     <bean id = "VendingMachineDao" class = "vendingmachine.dao.VendingMachineDaoImpl"/>
@@ -35,4 +35,23 @@
         <constructor-arg ref = "serviceLayer"/>
         <constructor-arg ref = "view"/>
     </bean>
+    
+    <bean id="loggingAdvice" class="vendingmachine.advice.LoggingAdvice">
+        <constructor-arg ref="auditDao"/>
+    </bean>
+    
+    <aop:config>
+        <aop:aspect ref="loggingAdvice">
+            <aop:after-throwing
+                method="createAuditEntry"
+                pointcut="execution(* vendingmachine.service.VendingMachineServiceLayer.sufficientFunds(..))"
+            />
+         
+            <aop:after-throwing
+                method="createAuditEntry"
+                pointcut="execution(* com.sg.classroster.service.VendingMachineServiceLayer.updateInventory(..))"
+            />
+            
+        </aop:aspect>
+    </aop:config>
 </beans>

@@ -7,8 +7,8 @@ package vendingmachine.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import vendingmachine.dao.VendingMachineAuditDao;
 import vendingmachine.dao.VendingMachineDao;
-import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Change;
 import vendingmachine.dto.Fad;
@@ -21,9 +21,11 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
     BigDecimal insertedAmount;
     private VendingMachineDao dao;
+    //private VendingMachineAuditDao audit;
 
     public VendingMachineServiceLayerImpl(VendingMachineDao myDao) {
         this.dao = myDao;
+        //this.audit = audit;
     }
 
     public void sufficientFunds(ArrayList< Fad> UglyItem, int Inventory, BigDecimal insertedAmount) throws InsufficientFundsException {

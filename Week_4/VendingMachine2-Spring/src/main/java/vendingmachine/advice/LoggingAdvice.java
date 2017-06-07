@@ -5,6 +5,7 @@
  */
 package vendingmachine.advice;
 
+import java.math.BigDecimal;
 import org.aspectj.lang.JoinPoint;
 import vendingmachine.dao.VendingMachineAuditDao;
 import vendingmachine.dao.VendingMachinePersistenceException;
@@ -33,4 +34,29 @@ public class LoggingAdvice {
             System.err.println("ERROR: Could not create audit entry in LoggingAdvice.");
         }
     }
+/*
+    public void createAuditEntryInsufficientFunds(JoinPoint jp) {
+        Object[] amount = jp.getArgs();
+        Item purchased = jp.getArgs();
+        String entry = jp.getSignature().getName() + "threw an insufficient funds exception.";
+        try {
+            auditDao.writeAuditEntry(auditEntry);
+        } catch (VendingMachinePersistenceException e) {
+            System.err.println("ERROR: Could not create audit entry in LoggingAdvice.");
+        }
+    }
+
+    public void createAuditEntryPersistenceException(JoinPoint jp) {
+        Object[] args = jp.getArgs();
+        String auditEntry = jp.getSignature().getName() + "Persistence Exception thrown.";
+        for (Object currentArg : args) {
+            auditEntry += currentArg;
+            try {
+                auditDao.writeAuditEntry(auditEntry);
+            } catch (VendingMachinePersistenceException e) {
+                System.err.println("ERROR: Could not create audit entry in LoggingAdvice.");
+            }
+        }
+    }
+*/
 }
