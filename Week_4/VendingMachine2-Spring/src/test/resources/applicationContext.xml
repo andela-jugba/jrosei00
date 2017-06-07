@@ -19,39 +19,9 @@
     <bean id="VendingMachineDao" 
           class="vendingmachine.dao.VendingMachineDaoImpl"/>
    
-    <bean id="VendingMachineDaoStub" 
-          class="vendingmachine.dao.VendingMachineDaoStubImpl"/>
-   
-    <bean id="auditDaoStub" 
-          class="vendingmachine.dao.VendingMachineAuditDaoStubImpl"/>
-   
     <bean id="serviceLayer" 
           class="vendingmachine.service.VendingMachineServiceLayerImpl">
-        <constructor-arg ref="VendingMachineDaoStub"/>
-        <constructor-arg ref="auditDaoStub"/>           
+        <constructor-arg ref="VendingMachineDao"/>
     </bean>
-
-    <bean id = "loggingAdvice" class = "vendingmachine.advice.LoggingAdvice">
-        <constructor-arg ref = "VendingMachineAuditDao"/>
-    </bean>
-
-    <aop:config>
-        <aop:aspect ref = "loggingAdvice">
-            <aop:after-returning
-                method = "createAuditEntry"
-                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.updateInventory(..))"
-            />
-            
-            <aop:after-returning
-                method = "createAuditEntry"
-                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.ItemInventory(..))"
-            />
-            
-            <aop:after-returning
-                method="createAuditEntry"
-                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.sufficientFunds(..))"
-            />
-            
-        </aop:aspect>
-    </aop:config>
+    
 </beans>

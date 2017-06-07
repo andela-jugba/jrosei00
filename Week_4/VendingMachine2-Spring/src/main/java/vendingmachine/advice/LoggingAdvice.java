@@ -22,7 +22,7 @@ public class LoggingAdvice {
         this.auditDao = auditDao;
     }
 
-    public void createAuditEntry(JoinPoint jp) {
+    public void createAuditEntry(JoinPoint jp, Exception ex) {
         Object[] args = jp.getArgs();
         String auditEntry = jp.getSignature().getName() + ": ";
         for (Object currentArg : args) {

@@ -28,7 +28,6 @@
 
     <bean id = "serviceLayer" class = "vendingmachine.service.VendingMachineServiceLayerImpl">
         <constructor-arg ref = "VendingMachineDao"/>
-        <constructor-arg ref = "VendingMachineAuditDao"/>
     </bean>
     
     <bean id = "controller" class = "vendingmachine.controller.VendingMachineController">
@@ -37,19 +36,27 @@
     </bean>
     
     <bean id="loggingAdvice" class="vendingmachine.advice.LoggingAdvice">
-        <constructor-arg ref="auditDao"/>
+        <constructor-arg ref="VendingMachineAuditDao"/>
     </bean>
     
     <aop:config>
-        <aop:aspect ref="loggingAdvice">
+        <aop:aspect ref = "loggingAdvice">
             <aop:after-throwing
-                method="createAuditEntry"
-                pointcut="execution(* vendingmachine.service.VendingMachineServiceLayer.sufficientFunds(..))"
+                method = "createAuditEntry"
+                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.updateInventory(..))"
+                throwing="ex"
             />
-         
+            
+            <aop:after-throwing
+                method = "createAuditEntry"
+                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.ItemInventory(..))"
+                throwing="ex"
+            />
+            
             <aop:after-throwing
                 method="createAuditEntry"
-                pointcut="execution(* com.sg.classroster.service.VendingMachineServiceLayer.updateInventory(..))"
+                pointcut = "execution(* vendingmachine.service.VendingMachineServiceLayer.sufficientFunds(..))"
+            throwing="ex"
             />
             
         </aop:aspect>
