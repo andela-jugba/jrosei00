@@ -29,20 +29,15 @@ public class orderDaoImpl implements orderDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
-    
-    @Override
-    public Order getOrder(LocalDate date) {
-        loadList();
-        return orders.get(date);
-    }
-    
-    
-
     @Override
         public Order removeOrder(LocalDate date) {
         Order removedOrder = orders.remove(date);
         return removedOrder;
+    }
+
+    @Override
+    public Order getOrder(LocalDate date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -65,8 +65,16 @@ public class flooringMasteryView {
     public String getDateChoice() {
         return io.readString("Please enter the order date."); //check for LocalDate
     }
-    
+
     public void displaySearchBanner() {
         io.print("=== Search for Order(s) ===");
+    }
+
+    public void displayUnknownCommandBanner() {
+        io.print("Unknown Command");
+    }
+
+    public void displayExitBanner() {
+        io.readString("Goodbye");
     }
 }

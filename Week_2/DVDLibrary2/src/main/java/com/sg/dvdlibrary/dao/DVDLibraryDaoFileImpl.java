@@ -176,7 +176,7 @@ public class DVDLibraryDaoFileImpl implements DVDLibraryDao {
 
         }
 
-        List<DVD> dvdList = this.getAllDVDs();
+        List<DVD> dvdList = new ArrayList<DVD>(dvds.values());
         for (DVD currentDVD : dvdList) {
             //write student object to file
             out.print(currentDVD.getTitle() + DELIMITER

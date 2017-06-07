@@ -72,20 +72,28 @@ public class flooringMasteryController {
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
-    
+
     private void addOrder() {
-	    view.displayAddOrderBanner();
-	    Order newOrder = view.getNewOrderInfo();
-	    dao.addOrder(newOrder.getDate(), newOrder);
-	    view.displayAddSuccessBanner();
-	}
-    
+        view.displayAddOrderBanner();
+        Order newOrder = view.getNewOrderInfo();
+        dao.addOrder(newOrder.getDate(), newOrder);
+        view.displayAddSuccessBanner();
+    }
+
     private void removeOrder() {
         view.displayRemoveOrderBanner();
         String date = view.getDateChoice();
         LocalDate.parse(date);
         dao.removeOrder(LocalDate.MAX);
         view.displayRemoveSuccessBanner();
-       
     }
+
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
+
+    private void exitMessage() {
+        view.displayExitBanner();
+    }
+
 }

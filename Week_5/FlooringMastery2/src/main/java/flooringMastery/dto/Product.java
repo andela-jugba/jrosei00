@@ -17,6 +17,10 @@ public class Product {
     private BigDecimal costPerSquareFoot;
     private BigDecimal laborCostPerSquareFoot;
 
+    public Product(String currentToken) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * @return the productType
      */

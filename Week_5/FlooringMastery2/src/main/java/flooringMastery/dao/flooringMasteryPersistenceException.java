@@ -11,13 +11,13 @@ import java.io.FileNotFoundException;
  *
  * @author apprentice
  */
-public class flooringMasteryPersisteneException extends Exception {
+public class flooringMasteryPersistenceException extends Exception {
 
-    public flooringMasteryPersisteneException(String message, FileNotFoundException e) {
+    public flooringMasteryPersistenceException(String message, FileNotFoundException e) {
         super(message);
     }
 
-    public flooringMasteryPersisteneException(String message, Throwable cause) {
+    public flooringMasteryPersistenceException(String message, Throwable cause) {
         super(message);
     }
 }
