@@ -5,6 +5,7 @@
  */
 package flooringMastery.controller;
 
+import flooringMastery.dao.flooringMasteryPersistenceException;
 import flooringMastery.dao.orderDao;
 import flooringMastery.dao.orderDaoImpl;
 import flooringMastery.dto.Order;
@@ -23,7 +24,7 @@ public class flooringMasteryController {
     flooringMasteryView view = new flooringMasteryView();
     orderDao dao = new orderDaoImpl();
 
-    public void run() {
+    public void run() throws flooringMasteryPersistenceException {
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing) {
@@ -42,38 +43,38 @@ public class flooringMasteryController {
 
             switch (menuSelection) {
                 case 1:
-                    io.print("DISPLAY ORDERS");
+                   getOrderByDate();
                     break;
                 case 2:
                     addOrder();
                     break;
                 case 3:
-                    io.print("EDIT ORDER");
+                    editOrder();
                     break;
                 case 4:
                     removeOrder();
                     break;
                 case 5:
-                    io.print("SAVE WORK");
+                    save();
                     break;
                 case 6:
-                    io.print("QUIT");
+                    quit();
                     break;
                 case 7:
                     keepGoing = false;
                     break;
                 default:
-                    io.print("UNKNOWN COMMAND");
+                    unknownCommand();
             }
         }
-        io.print("GOOD BYE");
+        exitMessage();
     }
 
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
 
-    private void addOrder() {
+    private void addOrder() throws flooringMasteryPersistenceException {
         view.displayAddOrderBanner();
         Order newOrder = view.getNewOrderInfo();
         dao.addOrder(newOrder.getDate(), newOrder);
@@ -83,8 +84,7 @@ public class flooringMasteryController {
     private void removeOrder() {
         view.displayRemoveOrderBanner();
         String date = view.getDateChoice();
-        LocalDate.parse(date);
-        dao.removeOrder(LocalDate.MAX);
+        dao.removeOrder(date, orderNumber);
         view.displayRemoveSuccessBanner();
     }
 
@@ -95,5 +95,26 @@ public class flooringMasteryController {
     private void exitMessage() {
         view.displayExitBanner();
     }
+    
+    private void getOrderByDate() {
+        view.displaySearchBanner();
+        String date = view.getDateToSearch(); 
+        
+    }
+    
+    private void displayOrders() throws flooringMasteryPersistenceException {
+        view.displayOrdersBanner();
+        String date = view.getDateChoice();
+        
+        
+    }
+    
+    /*
+    private void save() throws flooringMasteryPersistenceException {
+        
+    }
+*/
+  
+    
 
 }

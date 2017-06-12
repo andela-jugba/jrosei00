@@ -6,7 +6,8 @@
 package flooringMastery.ui;
 
 import flooringMastery.dto.Order;
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.time.LocalDate;
  */
 public class flooringMasteryView {
 
-    LocalDate date;
+    String date;
 
     flooringMasteryIO io = new flooringMasteryIOImpl();
 
@@ -38,11 +39,11 @@ public class flooringMasteryView {
         String state = io.readString("Please enter the state");
         String productType = io.readString("What type of product?");
         String area = io.readString("Please provide the area amount.");
-        Order currentOrder = new Order(LocalDate.now());
+        Order currentOrder = new Order(date);
         currentOrder.setCustomerName(customerName);
         currentOrder.setState(state);
         currentOrder.setProductType(productType);
-        currentOrder.setArea(area);
+        currentOrder.setArea(new BigDecimal(area));
         return currentOrder;
     }
 
@@ -76,5 +77,19 @@ public class flooringMasteryView {
 
     public void displayExitBanner() {
         io.readString("Goodbye");
+    }
+    
+    public String getDateToSearch() {
+        String date = io.readString("Please provide a date in the format MM/dd/yyyy.");
+        return date;
+    }
+    
+    public void displayOrderList(Map<String, Order> orders) {
+        io.print(" === Here is a list of all orders on file ===");
+        //something here
+        }
+    
+    public void displayOrdersBanner() {
+        io.print("=== Display Orders ===");
     }
 }

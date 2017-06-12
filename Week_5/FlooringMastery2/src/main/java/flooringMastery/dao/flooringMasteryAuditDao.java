@@ -5,15 +5,11 @@
  */
 package flooringMastery.dao;
 
-import flooringMastery.dto.Product;
-
 /**
  *
  * @author apprentice
  */
-public interface productDao {
+public interface flooringMasteryAuditDao {
     
-    Product getProductInfo(String productType);
-    
-    void readFromProductFile() throws flooringMasteryPersistenceException;  	    
+        public void writeAuditEntry(String entry) throws flooringMasteryPersistenceException;
 }

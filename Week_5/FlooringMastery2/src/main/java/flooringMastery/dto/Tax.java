@@ -13,10 +13,17 @@ import java.math.BigDecimal;
  */
 public class Tax {
 
-    public Tax(String currentToken) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String state;
+    private BigDecimal taxRate;
+
+    public Tax(String state, BigDecimal taxRate) {
+        this.state = state;
+        this.taxRate = taxRate;
     }
 
+    public Tax() {
+        
+    }
     /**
      * @return the state
      */
@@ -44,7 +51,4 @@ public class Tax {
     public void setTaxRate(BigDecimal taxRate) {
         this.taxRate = taxRate;
     }
-    
-    private String state;
-    private BigDecimal taxRate;
 }

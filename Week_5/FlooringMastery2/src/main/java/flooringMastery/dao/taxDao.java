@@ -5,10 +5,17 @@
  */
 package flooringMastery.dao;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 /**
  *
  * @author apprentice
  */
-public class taxDao {
-    
+public interface taxDao {
+
+    BigDecimal getAllTaxes(String state) throws flooringMasteryPersistenceException;
+
+    void readFromTaxFile() throws flooringMasteryPersistenceException;
+
 }

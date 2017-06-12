@@ -6,7 +6,6 @@
 package flooringMastery.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  *
@@ -14,13 +13,13 @@ import java.time.LocalDate;
  */
 public class Order {
 
-    private String orderNumber; //int
-    private LocalDate date; //LocalDate
+    private int orderNumber;
+    private String date;
     private String customerName;
     private String state;
     private BigDecimal taxRate;
     private String productType;
-    private String area; //BigDecimal
+    private BigDecimal area;
     private BigDecimal costPerSquareFoot;
     private BigDecimal laborCostPerSquareFoot;
     private BigDecimal materialCost;
@@ -28,39 +27,49 @@ public class Order {
     private BigDecimal tax;
     private BigDecimal total;
 
-    public Order(LocalDate date) {
+    public Order(String date, String customerName, String state,
+            BigDecimal taxRate, String productType, BigDecimal area,
+            BigDecimal costPerSquareFoot, BigDecimal laborCostPerSquareFoot,
+            BigDecimal materialCost, BigDecimal laborCost, BigDecimal tax,
+            BigDecimal total) {
         this.date = date;
-    }
-    
-    public Order() {
-        
+        this.customerName = customerName;
+        this.state = state;
+        this.taxRate = taxRate;
+        this.productType = productType;
+        this.area = area;
+        this.costPerSquareFoot = costPerSquareFoot;
+        this.laborCostPerSquareFoot = laborCostPerSquareFoot;
+        this.materialCost = materialCost;
+        this.laborCost = laborCost;
+        this.total = total;
     }
 
     /**
      * @return the orderNumber
      */
-    public String getOrderNumber() {
+    public int getOrderNumber() {
         return orderNumber;
     }
 
     /**
      * @param orderNumber the orderNumber to set
      */
-    public void setOrderNumber(String orderNumber) {
+    public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
 
     /**
      * @return the date
      */
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -123,14 +132,14 @@ public class Order {
     /**
      * @return the area
      */
-    public String getArea() {
+    public BigDecimal getArea() {
         return area;
     }
 
     /**
      * @param area the area to set
      */
-    public void setArea(String area) {
+    public void setArea(BigDecimal area) {
         this.area = area;
     }
 

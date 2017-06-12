@@ -6,55 +6,60 @@
 package flooringMastery.dao;
 
 import flooringMastery.dto.Product;
-import flooringMastery.dto.Tax;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
  *
  * @author apprentice
  */
-public class productDaoImpl {
+public class productDaoImpl implements productDao {
 
     public static final String PRODUCTS = "Products.txt";
     public static final String DELIMITER = ",";
 
-    ArrayList< Product> items = new ArrayList();
+    private Map< String, Product> material = new HashMap<>();
+    
+    public productDaoImpl() throws flooringMasteryPersistenceException {
+        readFromProductFile();
+        for (Map.Entry < String, Product > entry : material.entrySet()) {
+            System.out.println(entry.getKey() + "   " + entry.getValue());
+        }
+    }
 
-    private ArrayList< Product> readFromFile() throws flooringMasteryPersistenceException {
+    @Override
+    public void readFromProductFile() throws flooringMasteryPersistenceException {
 
         Scanner scanner;
 
         try {
-            scanner = new Scanner(new BufferedReader(new FileReader(PRODUCTS)));
+            scanner = new Scanner(new FileReader(PRODUCTS));
         } catch (FileNotFoundException e) {
             throw new flooringMasteryPersistenceException("Could not load products.", e);
         }
 
         String currentLine;
         String[] currentTokens;
-        items = new ArrayList();
 
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentTokens = currentLine.split(DELIMITER);
-            Product currentProduct = new Product(currentTokens[0]);
-            currentProduct.setProductType(currentTokens[1]);
-            currentProduct.setCostPerSquareFoot(new BigDecimal(currentTokens[2]));
-            currentProduct.setLaborCostPerSquareFoot(new BigDecimal(currentTokens[3]));
-            items.add(currentProduct);
+            Product currentProduct = new Product();
+            currentProduct.setProductType(currentTokens[0]);
+            currentProduct.setMaterialCostPerSquareFoot(new BigDecimal(currentTokens[1]));
+            currentProduct.setLaborCostPerSquareFoot(new BigDecimal(currentTokens[2]));
+
+            material.put(currentProduct.getProductType(), currentProduct);
         }
-        return items;
+        scanner.close();
     }
 
-    public ArrayList<Product> getAllProducts() throws flooringMasteryPersistenceException {
-        return readFromFile();
+    @Override
+    public Product getProductInfo(String productType) {
+        return material.get(productType);
     }
 }

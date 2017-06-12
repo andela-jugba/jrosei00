@@ -15,11 +15,15 @@ import java.util.HashMap;
  */
 public interface orderDao {
 
-    Order addOrder(LocalDate date, Order order);
+    Order addOrder(String date, Order order);
 
-    HashMap<LocalDate, String> getAllOrders();
+    HashMap<LocalDate, String> getOrderByDate(String date) throws flooringMasteryPersistenceException;
 
-    Order getOrder(LocalDate date);
+    void removeOrder(String date, int orderNumber, Order order) throws flooringMasteryPersistenceException;
 
-    Order removeOrder(LocalDate date);
+    void editOrder (Order order);
+
+    void save() throws flooringMasteryPersistenceException;
+    
+    Order getOrder(String date, int orderNumber) throws flooringMasteryPersistenceException;
 }

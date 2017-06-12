@@ -8,7 +8,6 @@ package vendingmachine.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import vendingmachine.dao.VendingMachineDao;
-import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Change;
 import vendingmachine.dto.Fad;
@@ -36,7 +35,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
     public void ItemInventory(ArrayList< Fad> UglyItem, int Inventory) throws NoItemInventoryException {
         if (UglyItem.get(Inventory).getInventory() <= 0) {
-            throw new NoItemInventoryException("That item seems to be out of stock. Good news, though. It's ugly anyways.");
+            throw new NoItemInventoryException ("That item seems to be out of stock. Good news, though. It's ugly anyways.");
         }
     }
 

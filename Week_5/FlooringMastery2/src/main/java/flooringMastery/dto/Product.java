@@ -12,13 +12,15 @@ import java.math.BigDecimal;
  * @author apprentice
  */
 public class Product {
-    
+
     private String productType;
-    private BigDecimal costPerSquareFoot;
+    private BigDecimal materialCostPerSquareFoot;
     private BigDecimal laborCostPerSquareFoot;
 
-    public Product(String currentToken) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Product(String productType, BigDecimal costPerSquareFoot, BigDecimal laborCostPerSquareFoot) {
+        this.productType = productType;
+        this.materialCostPerSquareFoot = costPerSquareFoot;
+        this.laborCostPerSquareFoot = laborCostPerSquareFoot;
     }
 
     /**
@@ -36,17 +38,17 @@ public class Product {
     }
 
     /**
-     * @return the costPerSquareFoot
+     * @return the materialCostPerSquareFoot
      */
-    public BigDecimal getCostPerSquareFoot() {
-        return costPerSquareFoot;
+    public BigDecimal getMaterialCostPerSquareFoot() {
+        return materialCostPerSquareFoot;
     }
 
     /**
-     * @param costPerSquareFoot the costPerSquareFoot to set
+     * @param costPerSquareFoot the materialCostPerSquareFoot to set
      */
-    public void setCostPerSquareFoot(BigDecimal costPerSquareFoot) {
-        this.costPerSquareFoot = costPerSquareFoot;
+    public void setMaterialCostPerSquareFoot(BigDecimal costPerSquareFoot) {
+        this.materialCostPerSquareFoot = costPerSquareFoot;
     }
 
     /**
