@@ -19,9 +19,8 @@ import vendingmachine.dto.Fad;
  * @author apprentice
  */
 public class VendingMachineDaoImplTest {
-    
+
     VendingMachineDaoImpl daoTest = new VendingMachineDaoImpl();
-    
 
     public VendingMachineDaoImplTest() {
     }
@@ -42,32 +41,10 @@ public class VendingMachineDaoImplTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of Read method, of class VendingMachineDaoImpl.
-     */
     @Test
-    public void testRead() throws Exception
-
-    {
+    public void testRead() throws Exception {
         ArrayList< Fad> test = daoTest.getAllItems();
 
         assertEquals(5, test.size());
     }
-/*
-    /**
-     * Test of write method, of class VendingMachineDaoImpl.
-     */
-    /*
-    @Test
-    public void testWrite() throws Exception {
-        System.out.println("write");
-        ArrayList<Fad> commemorating = null;
-        VendingMachineDaoImpl instance = new VendingMachineDaoImpl();
-        instance.write(commemorating);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    */
-
 }

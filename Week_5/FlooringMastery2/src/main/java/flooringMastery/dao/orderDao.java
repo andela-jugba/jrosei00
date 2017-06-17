@@ -8,6 +8,8 @@ package flooringMastery.dao;
 import flooringMastery.dto.Order;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,15 +17,15 @@ import java.util.HashMap;
  */
 public interface orderDao {
 
-    Order addOrder(String date, Order order);
+    Order addOrder(Order order) throws flooringMasteryPersistenceException;
 
-    HashMap<LocalDate, String> getOrderByDate(String date) throws flooringMasteryPersistenceException;
+    Order removeOrder(LocalDate date, int orderNumber, Order order) throws flooringMasteryPersistenceException;
 
-    void removeOrder(String date, int orderNumber, Order order) throws flooringMasteryPersistenceException;
-
-    void editOrder (Order order);
+    Order editOrder(Order order);
 
     void save() throws flooringMasteryPersistenceException;
+
+    public List<Order> getOrders(LocalDate date);
     
-    Order getOrder(String date, int orderNumber) throws flooringMasteryPersistenceException;
+    public Order getOrder(LocalDate date, int orderNumber) throws flooringMasteryPersistenceException;
 }

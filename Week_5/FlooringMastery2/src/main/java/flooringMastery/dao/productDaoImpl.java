@@ -6,6 +6,7 @@
 package flooringMastery.dao;
 
 import flooringMastery.dto.Product;
+import flooringMastery.service.invalidProductTypeException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.math.BigDecimal;
@@ -23,16 +24,15 @@ public class productDaoImpl implements productDao {
     public static final String DELIMITER = ",";
 
     private Map< String, Product> material = new HashMap<>();
-    
+
     public productDaoImpl() throws flooringMasteryPersistenceException {
         readFromProductFile();
-        for (Map.Entry < String, Product > entry : material.entrySet()) {
+        for (Map.Entry< String, Product> entry : material.entrySet()) {
             System.out.println(entry.getKey() + "   " + entry.getValue());
         }
     }
 
-    @Override
-    public void readFromProductFile() throws flooringMasteryPersistenceException {
+    void readFromProductFile() throws flooringMasteryPersistenceException {
 
         Scanner scanner;
 
@@ -62,4 +62,36 @@ public class productDaoImpl implements productDao {
     public Product getProductInfo(String productType) {
         return material.get(productType);
     }
+
+    @Override
+    public Map<String, Product> getAllItems() throws flooringMasteryPersistenceException {
+        return null;
+    }
+
+    @Override
+    public BigDecimal getCostByProductType(String productType) throws flooringMasteryPersistenceException {
+        BigDecimal materialCostPerSquareFoot = new BigDecimal (productType);
+        Map< String, Product> material = getAllItems();
+        for (int i = 0; i < material.size(); i++) {
+            if (productType.equalsIgnoreCase(material.get(i).getProductType())) {
+                materialCostPerSquareFoot = material.get(i).getMaterialCostPerSquareFoot();
+            }
+        }
+        return materialCostPerSquareFoot;
+
+    }
+
+    @Override
+    public BigDecimal getLaborCostByProductType(String productType) throws flooringMasteryPersistenceException {
+        BigDecimal laborCostPerSquareFoot = new BigDecimal (productType);
+        Map< String, Product> material = getAllItems();
+        for (int i = 0; i < material.size(); i++) {
+            if (productType.equalsIgnoreCase(material.get(i).getProductType())) {
+                laborCostPerSquareFoot = material.get(i).getLaborCostPerSquareFoot();
+            }
+        }
+        return laborCostPerSquareFoot;
+    }
+
+   
 }

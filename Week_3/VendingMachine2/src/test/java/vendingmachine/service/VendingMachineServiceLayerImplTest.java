@@ -47,45 +47,9 @@ public class VendingMachineServiceLayerImplTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getAllItems method, of class VendingMachineServiceLayerImpl.
-     *
-     */
-    /*
-    @Test
-    public void testGetAllItems() {
-        System.out.println("getAllItems");
-        VendingMachineServiceLayerImpl instance = new VendingMachineServiceLayerImpl();
-        ArrayList<Fad> expResult = null;
-        ArrayList<Fad> result = instance.Read();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        f
-     */
-
- /*
-     * Test of Write method, of class VendingMachineServiceLayerImpl.
-     *
-     */
- /*
-    @Test
-    public void testWrite() throws Exception {
-        System.out.println("Write");
-        ArrayList<Fad> Commemorating = null;
-        VendingMachineServiceLayerImpl instance = new VendingMachineServiceLayerImpl();
-        instance.Write(Commemorating);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-     */
-
- /*
-     * Test of LeftoverMoney method, of class VendingMachineServiceLayerImpl.
-     *
-     */
     @Test
     public void testLeftoverMoney() throws Exception {
-        
+
         ArrayList< Fad> UglyItem = serviceTest.getAllItems();
 
         Fad item = serviceTest.getItem(1);
@@ -98,10 +62,6 @@ public class VendingMachineServiceLayerImplTest {
 
     }
 
-    /*
-     * Test of numberOfCoins method, of class VendingMachineServiceLayerImpl.
-     *
-     */
     @Test
     public void testNumberOfCoins() throws Exception {
 
@@ -115,9 +75,6 @@ public class VendingMachineServiceLayerImplTest {
         assertEquals(2, testChange.getPenny());
     }
 
-    /*
-     * Test of sufficientFunds method, of class VendingMachineServiceLayerImpl.
-     */
     @Test
     public void testSufficientFunds() throws Exception {
 
@@ -145,27 +102,6 @@ public class VendingMachineServiceLayerImplTest {
         assertEquals(false, testExceptionThrown);
     }
 
-    /*r
-     * Test of updateInventory method, of class VendingMachineServiceLayerImpl.
-     *
-     */
- /*
-    @Test
-    public void testUpdateInventory() throws Exception { //YES
-        System.out.println("updateInventory");
-        ArrayList<Fad> UglyItem = null;
-        int Inventory = 0;
-        VendingMachineServiceLayerImpl instance = new VendingMachineServiceLayerImpl();
-        instance.updateInventory(UglyItem, Inventory);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-     */
-
- /*
-     * Test of ItemInventory method, of class VendingMachineServiceLayerImpl.
-     *
-     */
     @Test
     public void testItemInventory() throws NoItemInventoryException {
 

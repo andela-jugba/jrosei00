@@ -8,11 +8,18 @@ package flooringMastery.controller;
 import flooringMastery.dao.flooringMasteryPersistenceException;
 import flooringMastery.dao.orderDao;
 import flooringMastery.dao.orderDaoImpl;
+import flooringMastery.dao.productDao;
+import flooringMastery.dao.taxDao;
 import flooringMastery.dto.Order;
+import flooringMastery.service.flooringMasteryServiceLayer;
+import flooringMastery.service.invalidProductTypeException;
+import flooringMastery.service.invalidStateException;
 import flooringMastery.ui.flooringMasteryIO;
 import flooringMastery.ui.flooringMasteryIOImpl;
 import flooringMastery.ui.flooringMasteryView;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  *
@@ -20,30 +27,40 @@ import java.time.LocalDate;
  */
 public class flooringMasteryController {
 
-    private flooringMasteryIO io = new flooringMasteryIOImpl();
-    flooringMasteryView view = new flooringMasteryView();
-    orderDao dao = new orderDaoImpl();
+    //private flooringMasteryIO io;
+    flooringMasteryView view;
+    orderDao dao;
+    taxDao tax;
+    productDao product;
+    private flooringMasteryServiceLayer service;
 
-    public void run() throws flooringMasteryPersistenceException {
+    public flooringMasteryController(flooringMasteryServiceLayer service, flooringMasteryView view, orderDao dao, taxDao tax, productDao product) {
+        this.service = service;
+        this.view = view;
+        this.product = product;
+        this.tax = tax;
+        this.dao = dao;
+    }
+
+    public flooringMasteryController() {
+        this.service = service;
+    }
+
+    public flooringMasteryController(flooringMasteryServiceLayer service, flooringMasteryView view) {
+        this.service = service;
+        this.view = view;
+    }
+
+    public void run() throws flooringMasteryPersistenceException, invalidStateException, invalidProductTypeException {
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing) {
-            io.print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-            io.print("*  <<Flooring Program>>");
-            io.print("* 1. Display Orders");
-            io.print("* 2. Add an Order");
-            io.print("* 3. Edit an Order");
-            io.print("* 4. Remove an Order");
-            io.print("* 5. Save Current Work");
-            io.print("* 6. Quit");
-            io.print("*");
-            io.print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
-            menuSelection = getMenuSelection();
+            menuSelection = view.printMenuAndGetSelection();
 
             switch (menuSelection) {
                 case 1:
-                   getOrderByDate();
+                    displayOrders();
                     break;
                 case 2:
                     addOrder();
@@ -58,9 +75,6 @@ public class flooringMasteryController {
                     save();
                     break;
                 case 6:
-                    quit();
-                    break;
-                case 7:
                     keepGoing = false;
                     break;
                 default:
@@ -70,21 +84,27 @@ public class flooringMasteryController {
         exitMessage();
     }
 
-    private int getMenuSelection() {
+    
+    public int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
 
-    private void addOrder() throws flooringMasteryPersistenceException {
+
+    private void addOrder() throws flooringMasteryPersistenceException, invalidStateException, invalidProductTypeException {
         view.displayAddOrderBanner();
-        Order newOrder = view.getNewOrderInfo();
-        dao.addOrder(newOrder.getDate(), newOrder);
+        Order order = view.getNewOrderInfo();
+        service.addOrder(LocalDate.now(), order);
+        //dao.addOrder(order);        
         view.displayAddSuccessBanner();
     }
 
-    private void removeOrder() {
+    private void removeOrder() throws flooringMasteryPersistenceException {
         view.displayRemoveOrderBanner();
-        String date = view.getDateChoice();
-        dao.removeOrder(date, orderNumber);
+        LocalDate date = view.getDateChoice();
+        int orderNumber = view.getOrderNumber();
+        Order order = service.getOrder(date.format(DateTimeFormatter.ofPattern("MMddyyyy")), orderNumber);
+        //Order order = dao.getOrder(date, orderNumber);
+        service.removeOrder(date.format(DateTimeFormatter.ofPattern("MMddyyyy")), orderNumber, order);
         view.displayRemoveSuccessBanner();
     }
 
@@ -95,26 +115,26 @@ public class flooringMasteryController {
     private void exitMessage() {
         view.displayExitBanner();
     }
-    
-    private void getOrderByDate() {
-        view.displaySearchBanner();
-        String date = view.getDateToSearch(); 
-        
-    }
-    
-    private void displayOrders() throws flooringMasteryPersistenceException {
-        view.displayOrdersBanner();
-        String date = view.getDateChoice();
-        
-        
-    }
-    
-    /*
-    private void save() throws flooringMasteryPersistenceException {
-        
-    }
-*/
-  
-    
 
+    private void displayOrders() throws flooringMasteryPersistenceException {
+        view.displaySearchBanner();
+        LocalDate date = view.getDateChoice();
+        List<Order> orders = service.getOrders(date);
+        view.displayOrders(orders);
+
+    }
+
+    private void save() throws flooringMasteryPersistenceException {
+        service.save();
+    }
+
+    private void editOrder() throws flooringMasteryPersistenceException {
+        view.displayEditOrderBanner();
+        LocalDate date = view.getDateChoice();
+        int orderNumber = view.getOrderNumber();
+        Order oldOrder = service.getOrder(date.format(DateTimeFormatter.ofPattern("MMddyyyy")), orderNumber);
+        Order newOrder = view.editOrder(oldOrder);
+        service.editOrder(newOrder);
+
+    }
 }

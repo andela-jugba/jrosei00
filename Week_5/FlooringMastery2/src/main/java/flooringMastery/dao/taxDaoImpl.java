@@ -23,15 +23,15 @@ public class taxDaoImpl implements taxDao {
     public static final String TAXES = "Taxes.txt";
     public static final String DELIMITER = ",";
 
-    private Map< String, BigDecimal> states = new HashMap<>();
+    private Map< String, Tax> states = new HashMap<>();
 
     public taxDaoImpl() throws flooringMasteryPersistenceException {
         readFromTaxFile();
-        for (Map.Entry < String, BigDecimal > entry : states.entrySet()) {
+        for (Map.Entry< String, Tax> entry : states.entrySet()) {
             System.out.println(entry.getKey() + "   " + entry.getValue());
         }
     }
-    @Override
+
     public void readFromTaxFile() throws flooringMasteryPersistenceException {
 
         Scanner scanner;
@@ -57,7 +57,30 @@ public class taxDaoImpl implements taxDao {
     }
 
     @Override
-    public BigDecimal getAllTaxes(String state) throws flooringMasteryPersistenceException {
-        return states.get(state);
+    public BigDecimal getTaxRate(String state) {
+       // Map< String, Tax> states = getAllTaxes();
+        //for (String stateTax : states.keySet()); 
+        Tax getTax = states.get(state);
+        BigDecimal getTaxOut = getTax.getTaxRate();
+//        
+//        for (int i = 0; i < states.size(); i++) {
+//            if (state.equalsIgnoreCase(states.get(i).getState())) {
+//            getTaxOut = states.get(i).getTaxRate();
+//        }
+//    }
+
+    return getTaxOut;
     }
+    
+    /*
+    @Override
+       public Map< String, Tax> getAllTaxes(String) {
+           Map< String, Tax> taxesInList = new HashMap<>();
+           taxesInList.put(state, value);
+           return taxesInList;
+       }
+*/
+        
+
+
 }

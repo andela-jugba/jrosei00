@@ -5,7 +5,10 @@
  */
 package flooringMastery.dao;
 
+import flooringMastery.dto.Tax;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,8 +17,8 @@ import java.util.Map;
  */
 public interface taxDao {
 
-    BigDecimal getAllTaxes(String state) throws flooringMasteryPersistenceException;
-
-    void readFromTaxFile() throws flooringMasteryPersistenceException;
-
+    BigDecimal getTaxRate(String state);
+    
+    //public Map< String, Tax> getAllTaxes();
+    
 }

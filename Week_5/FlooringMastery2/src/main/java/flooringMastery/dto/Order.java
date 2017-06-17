@@ -6,6 +6,7 @@
 package flooringMastery.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 public class Order {
 
     private int orderNumber;
-    private String date;
+    private LocalDate date;
     private String customerName;
     private String state;
     private BigDecimal taxRate;
@@ -27,7 +28,7 @@ public class Order {
     private BigDecimal tax;
     private BigDecimal total;
 
-    public Order(String date, String customerName, String state,
+    public Order(LocalDate date, String customerName, String state,
             BigDecimal taxRate, String productType, BigDecimal area,
             BigDecimal costPerSquareFoot, BigDecimal laborCostPerSquareFoot,
             BigDecimal materialCost, BigDecimal laborCost, BigDecimal tax,
@@ -45,7 +46,13 @@ public class Order {
         this.total = total;
     }
 
-    /**
+    public Order() {
+    }
+
+    public Order(LocalDate date) {
+    }
+
+    /**order.getOrderNumber()
      * @return the orderNumber
      */
     public int getOrderNumber() {
@@ -62,14 +69,14 @@ public class Order {
     /**
      * @return the date
      */
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     /**
-     * @param date the date to set
+     * @param date the date to order.getOrderNumber()set
      */
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

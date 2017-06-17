@@ -7,6 +7,11 @@ package flooringMastery.ui;
 
 import flooringMastery.dto.Order;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,9 +20,16 @@ import java.util.Map;
  */
 public class flooringMasteryView {
 
-    String date;
+    LocalDate date;
 
-    flooringMasteryIO io = new flooringMasteryIOImpl();
+    private flooringMasteryIO io;
+
+    public flooringMasteryView(flooringMasteryIO io) {
+        this.io = io;
+    }
+
+    public flooringMasteryView() {
+    }
 
     public int printMenuAndGetSelection() {
         io.print("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
@@ -63,8 +75,10 @@ public class flooringMasteryView {
         io.readString("Order successfully removed. Please hit enter to continue.");
     }
 
-    public String getDateChoice() {
-        return io.readString("Please enter the order date."); //check for LocalDate
+    public LocalDate getDateChoice() {
+        DateFormat format = new SimpleDateFormat("MMddYYY");
+        LocalDate date = LocalDate.parse(io.readString("Please enter the order date in the format MM/dd/yyyy."));
+        return date;
     }
 
     public void displaySearchBanner() {
@@ -78,18 +92,87 @@ public class flooringMasteryView {
     public void displayExitBanner() {
         io.readString("Goodbye");
     }
-    
+
+    /*
     public String getDateToSearch() {
         String date = io.readString("Please provide a date in the format MM/dd/yyyy.");
         return date;
     }
-    
+     */
     public void displayOrderList(Map<String, Order> orders) {
         io.print(" === Here is a list of all orders on file ===");
         //something here
-        }
-    
+    }
+
     public void displayOrdersBanner() {
         io.print("=== Display Orders ===");
+    }
+
+    public boolean confirmOrder(String prompt) {
+        String confirmInput = io.readString(prompt);
+
+        if (confirmInput.equalsIgnoreCase("Y")) {
+            io.readString("Sounds good. Please hit enter to continue.");
+        } else {
+            return false;
+        }
+        return false;
+    }
+
+    public void displayOrders(List<Order> orders) {
+        for (Order order : orders) {
+            io.print("Order Number: " + order.getOrderNumber()
+                    + "\n Name:" + order.getCustomerName()
+                    + "\nState:" + order.getState()
+                    + "\nTax Rate" + order.getTaxRate() + "%"
+                    + "\nProduct Type" + order.getProductType()
+                    + "\nArea" + order.getArea()
+                    + "\nMaterial Cost: $" + order.getCostPerSquareFoot() + "/ft^2"
+                    + "\nLabor Cost: $" + order.getLaborCostPerSquareFoot() + "/ft^2"
+                    + "\nMaterial Cost: $" + order.getMaterialCost()
+                    + "\nLabor Cost" + order.getLaborCost()
+                    + "\nTax: $" + order.getTax()
+                    + "\nTotal: $" + order.getTotal());
+
+            io.readString("\nPlease hit enter to continue.");
+        }
+    }
+
+    public int getOrderNumber() {
+        int orderNumber = io.readInt("Order Number:");
+        return orderNumber;
+    }
+
+    public void displayEditOrderBanner() {
+        io.print("=== EDIT ORDER ===");
+    }
+    
+    public String makeChange(String currentInfo, String infoField) {
+
+        io.print("Current " + infoField + ": " + currentInfo);
+        String input = io.readString(infoField);
+        if (input.length() < 1) {
+            return currentInfo;
+        } else {
+            return input;
+
+        }
+    }
+
+    public Order editOrder(Order orderToEdit) {
+        String date = makeChange(orderToEdit.getDate().format(DateTimeFormatter.ofPattern("MMddyyyy")), "Date");
+        int orderNumber = Integer.parseInt(makeChange(Integer.toString(orderToEdit.getOrderNumber()), "Order Number"));
+        String customerName = makeChange(orderToEdit.getCustomerName(), "Customer Name");
+        String state = makeChange(orderToEdit.getState(), "State");
+        String productType = orderToEdit.getProductType();
+        BigDecimal area = new BigDecimal(makeChange(orderToEdit.getArea().toString(), "Area"));
+        
+        Order newOrder = new Order();
+        newOrder.setCustomerName(customerName);
+        newOrder.setState(state);
+        newOrder.setProductType(productType);
+        newOrder.setArea(area);
+        
+        return newOrder;
     }
 }

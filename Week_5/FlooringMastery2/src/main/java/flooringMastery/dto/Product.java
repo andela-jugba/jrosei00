@@ -23,6 +23,9 @@ public class Product {
         this.laborCostPerSquareFoot = laborCostPerSquareFoot;
     }
 
+    public Product() {
+    }
+
     /**
      * @return the productType
      */

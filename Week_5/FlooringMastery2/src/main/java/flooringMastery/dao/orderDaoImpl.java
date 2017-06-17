@@ -6,19 +6,16 @@
 package flooringMastery.dao;
 
 import flooringMastery.dto.Order;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
@@ -26,131 +23,118 @@ import java.util.Scanner;
  */
 public class orderDaoImpl implements orderDao {
 
-    private Map<String, Order> orders = new HashMap<>();
+    private Map<LocalDate, List<Order>> orders = new HashMap<>();
     public static final String Order_List = "DateToFile.txt";
     public static final String DELIMITER = ",";
-    
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMddyyyy");
     private Integer orderNumber = 0;
-    Date date = new Date();
-
-    public String DateToFile() {
-        SimpleDateFormat formatter = new SimpleDateFormat("MMddYYYY");
-        return "Orders_" + formatter + ".txt";
+    
+    public orderDaoImpl () {       
     }
 
+    public String DateToFile(LocalDate date) {
+        Set<String> dates = new HashSet<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddyyyy");
+        return "Orders_" + date.format(formatter) + ".txt";
+    }
 
-    
-    private void writeToOrder() {
+    @Override
+    public Order addOrder(Order order) throws flooringMasteryPersistenceException {
+        //List< Order> newDate = orders.get(LocalDate.now());
+        if (!orders.containsKey(order.getDate())) {
+        orders.put(order.getDate(), List < LocalDate noOrders > noDaTE); 
+        }
+            List< Order> newDate = orders.get(order.getDate());
+        newDate.add(order);
+         
+        
+        
+        orders.put(order.getDate(), );
+        order.setOrderNumber(orderNumber);
+        return order;
+    }
 
+    @Override
+    public Order removeOrder(LocalDate date, int orderNumber, Order order) throws flooringMasteryPersistenceException {
+        //Order removedOrder = orders.remove(date, orderNumber);
+        orders.remove(date, orderNumber);
+        return order;
+    }
+
+    @Override
+    public Order editOrder(Order newOrder) {
+        String date = newOrder.getDate().format(DateTimeFormatter.ofPattern("MMddyyyy"));
+        List<Order> orderList = orders.get(date);
+        for (Order o : orderList) {
+            if (o.getOrderNumber() == orderNumber) {
+                orderList.remove(o);
+                orderList.add(newOrder);
+            }
+        }
+        orders.remove(date);
+        orders.put(newOrder.getDate(), orderList);
+        return null;
+    }
+
+    @Override
+    public void save() throws flooringMasteryPersistenceException {
+        writeToOrder();
+    }
+
+    @Override
+    public List<Order> getOrders(LocalDate date) {
+        return orders.get(date);
+    }
+
+    public void writeToOrder() throws flooringMasteryPersistenceException {
         PrintWriter out = null;
-        Date date = new Date();
-        SimpleDateFormat dateformat = new SimpleDateFormat("MMddYYYY");
+        for (LocalDate entry : orders.keySet()) {
+            try {
+                out = new PrintWriter(new FileWriter(DateToFile(entry)));
+            } catch (IOException ex) {
+                System.out.println("cannot write to file.");
+            }
+            List<Order> purchases = orders.get(entry);
+            for (Order entryPoint : purchases) {
+                out.println(
+                        +entryPoint.getOrderNumber()
+                        + DELIMITER + entryPoint.getDate()
+                        + DELIMITER + entryPoint.getCustomerName()
+                        + DELIMITER + entryPoint.getState()
+                        + DELIMITER + entryPoint.getTaxRate()
+                        + DELIMITER + entryPoint.getProductType()
+                        + DELIMITER + entryPoint.getArea()
+                        + DELIMITER + entryPoint.getCostPerSquareFoot()
+                        + DELIMITER + entryPoint.getLaborCostPerSquareFoot()
+                        + DELIMITER + entryPoint.getMaterialCost()
+                        + DELIMITER + entryPoint.getLaborCost()
+                        + DELIMITER + entryPoint.getTax()
+                        + DELIMITER + entryPoint.getTotal());
+                out.flush();
+            }
 
-        try {
-            out = new PrintWriter(new FileWriter(Order_List));
-        } catch (IOException e) {
-
+            out.close();
         }
+    }
 
-        Map<String, Order> orders = new HashMap<>(orders.values()) {};
-        for (Order currentOrder : orderList) {
-            //write student object to file
-            out.print(currentOrder.getCustomerName() + DELIMITER
-                    + currentOrder.getState() + DELIMITER
-                    + currentOrder.getProductType() + DELIMITER
-                    + currentOrder. + DELIMITER
-                    + currentOrder.getDirector() + DELIMITER
-                    + currentOrder.getComment());
-            out.flush();
+    private int getLargestOrderNumber(LocalDate date) {
+        if (orders.get(date) == null) {
+            return 1;
+        } else {
+            List< Order> ordernum = orders.get(date);
+            int max = Integer.MIN_VALUE;
+            for (Order i : ordernum) {
+                if (i.getOrderNumber() > max) {
+                    max = i.getOrderNumber();
+                }
+            }
+            return max + 1;
         }
-        out.close();
-    }
-     
- 
-    public void readFromOrderFile() throws flooringMasteryPersistenceException {
-
-        Scanner scanner;
-
-        try {
-            scanner = new Scanner(new BufferedReader(new FileReader(Order_List)));
-        } catch (FileNotFoundException e) {
-            throw new flooringMasteryPersistenceException("Could not load orders.", e);
-        }
-
-        String currentLine;
-        String[] currentTokens;
-
-        while (scanner.hasNextLine()) {
-            currentLine = scanner.nextLine();
-            currentTokens = currentLine.split(DELIMITER);
-            Order order = new Order();
-            order.setDate(currentTokens[0]);
-            order.setOrderNumber(new Integer(currentTokens[1]));
-            order.setCustomerName(currentTokens[2]);
-            order.setState(currentTokens[3]);
-            order.setTaxRate(new BigDecimal(currentTokens[4]));
-            order.setProductType(currentTokens[5]);
-            order.setArea(new BigDecimal(currentTokens[6]));
-            order.setCostPerSquareFoot(new BigDecimal(currentTokens[7]));
-            order.setLaborCostPerSquareFoot(new BigDecimal(currentTokens[8]));
-            order.setMaterialCost(new BigDecimal(currentTokens[9]));
-            order.setLaborCost(new BigDecimal(currentTokens[10]));
-            order.setTax(new BigDecimal(currentTokens[11]));
-            order.setTotal(new BigDecimal(currentTokens[12]));
-
-            orders.put(order.getDate(), order);
-        }
-        scanner.close();
-    }
-    
- /*
-    @Override
-    public void save() throws flooringMasteryPersistenceException {
-    }
-     */
-
- /*
-    @Override
-    public Order removeOrder(String date, int orderNumber, Order order) throws flooringMasteryPersistenceException {
-        Order removedOrder = orders.remove(date);
-        return removedOrder;
-    }
-     */
-
-    @Override
-    public Order addOrder(String date, Order order) {
-        DateToFile();
-        Order newOrder = orders.put(date, order);
-        orderNumber ++;
-        return newOrder;
     }
 
     @Override
-    public HashMap<LocalDate, String> getOrderByDate(String date) throws flooringMasteryPersistenceException {
-        return new HashMap<>(orders.get(date).getOrderNumber());
+    public Order getOrder(LocalDate date, int orderNumber) throws flooringMasteryPersistenceException {
+        return orders.get(date).get(orderNumber);
     }
-
-    @Override
-    public void removeOrder(String date, int orderNumber, Order order) throws flooringMasteryPersistenceException {
-    }
-
-    @Override
-    public void save() throws flooringMasteryPersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Order getOrder(String date, int orderNumber) throws flooringMasteryPersistenceException {
-        return orders.get(date).getOrder(date);
-    }
-
-    //will do later
-    /*
-    @Override
-    public void editOrder(Order order) {
-        
-        
-    }
-*/
 
 }
