@@ -27,6 +27,6 @@ public class App {
         DVDLibraryView myView = new DVDLibraryView(myIO); //source from view
         DVDLibraryDao myDao = new DVDLibraryDaoFileImpl(); //source from dao
         DVDLibraryController controller = new DVDLibraryController (myDao, myView); //source from controller
-        controller.run(); //controller calls to app does the final run method
+        controller.run(); 
     }
 }

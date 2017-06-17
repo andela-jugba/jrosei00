@@ -77,7 +77,7 @@ public class flooringMasteryView {
 
     public LocalDate getDateChoice() {
         DateFormat format = new SimpleDateFormat("MMddYYY");
-        LocalDate date = LocalDate.parse(io.readString("Please enter the order date in the format MM/dd/yyyy."));
+        LocalDate date = LocalDate.parse(io.readString("Please enter the order date in the format MMddyyyy."));
         return date;
     }
 

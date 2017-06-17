@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -40,27 +41,30 @@ public class orderDaoImpl implements orderDao {
 
     @Override
     public Order addOrder(Order order) throws flooringMasteryPersistenceException {
-        //List< Order> newDate = orders.get(LocalDate.now());
+        List< Order> newDate = orders.get(LocalDate.now());
         if (!orders.containsKey(order.getDate())) {
-        orders.put(order.getDate(), List < LocalDate noOrders > noDaTE); 
+        orders.put(order.getDate(), ArrayList < noOrders > noDate); 
         }
-            List< Order> newDate = orders.get(order.getDate());
+          orders.get(order.getDate());
         newDate.add(order);
          
+        save();
         
-        
-        orders.put(order.getDate(), );
+        //orders.put(order.getDate(), );
         order.setOrderNumber(orderNumber);
         return order;
     }
 
+    /*
     @Override
     public Order removeOrder(LocalDate date, int orderNumber, Order order) throws flooringMasteryPersistenceException {
         //Order removedOrder = orders.remove(date, orderNumber);
         orders.remove(date, orderNumber);
         return order;
     }
+*/
 
+    /*
     @Override
     public Order editOrder(Order newOrder) {
         String date = newOrder.getDate().format(DateTimeFormatter.ofPattern("MMddyyyy"));
@@ -75,6 +79,7 @@ public class orderDaoImpl implements orderDao {
         orders.put(newOrder.getDate(), orderList);
         return null;
     }
+*/
 
     @Override
     public void save() throws flooringMasteryPersistenceException {
